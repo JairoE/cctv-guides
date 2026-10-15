@@ -247,6 +247,7 @@ p{margin:0}
     <p>Podcasts, interviews, talks, and streams work best. The app needs spoken audio, because it finds moments by reading what was said.</p>
     <ul>
       <li>Choose how many clips you want, from 1 to 5. Your first run is capped at 1 to 3, because it renders every clip in all four caption styles (step 2).</li>
+      <li>Pick a <b>Format</b>: 9:16 portrait, 1:1 square, or 16:9 landscape. It starts on your saved framing and applies to this run only. Post and Schedule take portrait clips.</li>
       <li>Your saved caption style is shown in the top bar. Click <b>Caption style ▾</b> to change it.</li>
       <li>Uploading the same file again costs nothing. The transcript is cached.</li>
     </ul>
@@ -273,6 +274,9 @@ p{margin:0}
         <label class="field">How many clips
           <span class="input mono">3 ▾</span>
         </label>
+        <label class="field">Format
+          <span class="input mono">9:16 portrait ▾</span>
+        </label>
         <span class="muted small" style="flex:1;min-width:160px">Each clip is 9:16, captioned in <b>Bold Pop</b>, cropped to fill.</span>
         <span class="btn accent">Find my clips</span>
       </div>
@@ -291,7 +295,7 @@ p{margin:0}
       <li>Both sides show the same words, so you judge only the look.</li>
       <li>Names appear only after the final pick.</li>
     </ul>
-    <p class="note">This is the only vote in clip mode. From <b>Caption style ▾</b> in the top bar, <b>Rerun setup</b> repeats it on your next job, and <b>Choose directly</b> picks a style by name. Video mode works differently: you pick a favorite from each job.</p>
+    <p class="note">This is the only pick in clip mode. From <b>Caption style ▾</b> in the top bar, <b>Rerun setup</b> repeats it on your next job, and <b>Choose directly</b> picks a style by name. Video mode works differently: you pick a favorite from each job.</p>
   </div>
   <figure class="frame" aria-label="Mockup: first-run caption style pick">
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / make / style</div></div>
@@ -328,9 +332,9 @@ p{margin:0}
     <ul>
       <li><b>Transcribe:</b> words with exact timestamps.</li>
       <li><b>Find moments:</b> scores each stretch on hook, flow, value, and trend, then keeps the best ones.</li>
-      <li><b>Render:</b> trims, reframes to 9:16, and burns in captions.</li>
+      <li><b>Render:</b> trims, reframes to your format, and burns in captions.</li>
     </ul>
-    <p class="note">A 45-minute video usually takes a few minutes. Most of that is transcription, which is skipped entirely on a re-upload.</p>
+    <p class="note">A 45-minute video usually takes a few minutes. Most of that is transcription, which is skipped entirely on a re-upload. If a job fails, its card shows <b>Retry</b>, which picks up where it stopped without redoing anything already transcribed or rendered.</p>
   </div>
   <figure class="frame" aria-label="Mockup: job progress">
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / make</div></div>
@@ -473,17 +477,18 @@ p{margin:0}
   </figure>
 </section>
 
-<section class="retired" aria-labelledby="retired-h">
+<section class="retired" aria-labelledby="labs-h">
   <div style="display:grid;gap:10px">
-    <span class="eyebrow">What a new user won't see</span>
-    <h2 id="retired-h">Three things folded away</h2>
-    <p class="muted" style="max-width:62ch">The old app had four tabs and three creation modes. It now has three tabs and two modes. The rest is removed, folded in, or moved behind a flag, and your existing clips and votes are kept either way.</p>
+    <span class="eyebrow">One more tab, off by default</span>
+    <h2 id="labs-h">Animate (Labs)</h2>
+    <p class="muted" style="max-width:62ch">The app has three tabs: Make clips, Make videos, and Schedule. A fourth, <b>Animate (Labs)</b>, appears only when the server sets <span class="mono">ANIMATE_ENABLED=true</span>, because it calls a paid AI video service and needs an inference.sh key.</p>
   </div>
   <div class="gone-grid">
-    <div class="gone"><span class="chip fold">Folded into quick picks</span><h3>Vote tab</h3><p>Voting now happens where you work: the three-pick caption setup for clips, and a blind “pick your favorite” on each video job. There's no longer an endless stream of pairs to judge.</p></div>
-    <div class="gone"><span class="chip cut">Removed</span><h3>Results &amp; leaderboards</h3><p>Your picks become your defaults: a caption style for clips, and your last favorite look for videos. No ranking table needed.</p></div>
-    <div class="gone"><span class="chip lab">Labs · off by default</span><h3>Video → animate</h3><p>AI-animated segments passed their quality checks and a live test in September 2026. They stay behind a flag as the <b>Animate (Labs)</b> tab, because they call a paid video-generation service.</p></div>
+    <div class="gone"><span class="chip lab">Labs</span><h3>Image, Text, Transition</h3><p>Animate a photo, make a shot from a prompt, or move from one image to another. Each job makes one short clip.</p></div>
+    <div class="gone"><span class="chip lab">Labs</span><h3>Video → talk/action</h3><p>Pick up to three moments in your own video, and the subject talks or acts, then your footage carries on.</p></div>
+    <div class="gone"><span class="chip fold">Download</span><h3>One MP4 per job</h3><p>Animate clips skip blind picks and the Schedule queue. Play the clip on its card, download it, and post it yourself.</p></div>
   </div>
+  <p><a href="animate.html">Open the Animate guide →</a></p>
   <p class="foot">Mockups follow the current app, simplified. Clip titles, scores, and timestamps are illustrative. The caption styles shown are the app's four real presets: Bold Pop, Clean Lower-Third, Pill Punch, and Caps Classic.</p>
 </section>
 
