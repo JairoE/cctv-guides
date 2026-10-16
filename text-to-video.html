@@ -219,6 +219,8 @@ td .why{color:var(--muted);font-size:13px}
 .cost b{font:800 26px/1 var(--display);font-variant-numeric:tabular-nums}
 .cost span{font-size:13.5px;color:var(--muted)}
 .foot-note{font-size:13px;color:var(--muted);max-width:74ch}
+ul.trouble{margin:0;padding-left:1.1em;display:grid;gap:8px;max-width:72ch}
+ul.trouble li::marker{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -420,7 +422,7 @@ music loops to fit and fades out over the last 2 s</div>
     <p>The job card shows your references, your brief, and the script AI wrote from it. Each video appears as soon as it finishes.</p>
     <ul>
       <li><b>Pick my favorite</b> shows your videos two at a time, with names hidden. Three videos take two picks. The winner's look is preselected as the first video of your next job, and the others lead with this week's 🔥 hot style.</li>
-      <li>Portrait videos get a <b>Post</b> button for Instagram Reels and TikTok.</li>
+      <li>Portrait videos get a <b>Post</b> button for Instagram Reels and TikTok. Make videos cards have no <b>Schedule</b> button, but the Post form also has <b>Add to daily queue</b>. The form works the same as in the <a href="first-run.html#post">Make clips guide</a>, including the TikTok privacy and music confirmation it asks for.</li>
       <li>Re-running the same job costs nothing. Every AI result is cached.</li>
     </ul>
   </div>
@@ -485,6 +487,19 @@ music loops to fit and fades out over the last 2 s</div>
     <div><b>$0</b><span>Any re-run, resume, or identical re-submit. Every paid result is saved and reused.</span></div>
   </div>
   <p class="foot-note">The subject and style descriptions shown in steps 3–4 are illustrative.</p>
+</section>
+
+<section class="sec" id="trouble" aria-labelledby="trouble-h">
+  <span class="eyebrow">Help</span>
+  <h2 id="trouble-h">If something is greyed out or fails</h2>
+  <ul class="trouble">
+    <li><b>AI writes the script, AI imagery ✨, or the OpenAI voices are greyed out.</b> They need the app's OpenAI connection, which isn't set up yet. Procedural imagery and Mac voices still work. Hover an option to see why, and ask whoever runs your app.</li>
+    <li><b>The submit button is greyed out.</b> A setting can't be honored, as in the table above. The form says what to fix.</li>
+    <li><b>Post is greyed out.</b> Either the video isn't portrait, or no Instagram or TikTok account is connected yet. Hover the button to see which.</li>
+    <li><b>Post now is greyed out in the Post form.</b> The form lists what's missing in red, such as the TikTok privacy level or the music confirmation.</li>
+    <li><b>A job failed.</b> The card shows the reason. Submit the same job again. Every AI result that finished is reused, so nothing is paid for twice.</li>
+    <li><b>A post failed.</b> The status line under the form says why. Fix that, then press <b>Post now</b> again.</li>
+  </ul>
 </section>
 
 </div>
