@@ -160,6 +160,10 @@ th,td{text-align:left;padding:10px 14px;border-top:1px solid var(--line);vertica
 thead th{border-top:0;font:500 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
 td:first-child{font-weight:600}
 .foot{font-size:13px;color:var(--muted);max-width:70ch;padding-top:8px}
+.progress{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.pill:not(.ok){color:var(--muted);background:var(--surface-2);border:1px solid var(--line)}
+ul.trouble{margin:0;padding-left:1.1em;display:grid;gap:8px;max-width:72ch}
+ul.trouble li::marker{color:var(--muted)}
 </style>
 </head>
 <body>
@@ -331,7 +335,9 @@ td:first-child{font-weight:600}
     <h2>Make your subject talk or act</h2>
     <p>Film your cat, then make it answer back. Upload a video, mark up to three moments, and the app cuts to an animated version of that frame, then back to your footage.</p>
     <ul>
-      <li>Upload an MP4, MOV, WebM, or MKV, then <b>+ Add segment</b> (up to 3). Set each cut time and check the frame preview beside it.</li>
+      <li>Choose an MP4, MOV, WebM, or MKV, then click <b>Upload</b>. Choosing the file doesn't upload it. Once it's uploaded, its name, length, and size show beside the button, and <b>+ Add segment</b> appears (up to 3).</li>
+      <li>Set each segment's cut time and check the frame preview beside it.</li>
+      <li>List segments in time order. Each cut must come after the one before, no two can share a cut time, and a cut can't fall inside footage an earlier segment skips over. If one does, a red line under the segments says which to fix.</li>
       <li><b>talk</b>: the subject lip-syncs a line. Use a <b>TTS voice</b> (choose a voice, type up to 200 characters) or <b>Your recording</b> (an audio file up to 12 s). Captions use one of the four caption styles, or none, and show only while it speaks.</li>
       <li><b>action</b>: describe what it does, for 4–10 seconds. Action segments are silent.</li>
       <li>After each segment: <b>Resume where it cut</b> adds the animation, so the video gets longer. <b>Skip ahead to…</b> replaces that stretch of your footage instead.</li>
@@ -342,7 +348,7 @@ td:first-child{font-weight:600}
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate · Video → talk/action</div></div>
     <div class="app">
       <div class="card">
-        <div class="row"><span class="btn sm">Upload</span><span class="small muted">cat.mov · 12.8s · 1080×1920</span></div>
+        <div class="row"><span class="select">Choose file: cat.mov</span><span class="btn sm">Upload</span><span class="small muted">cat.mov · 12.8s · 1080×1920</span></div>
         <div class="row"><b>Segments</b><span class="btn sm">+ Add segment</span><span class="small muted">1/3</span></div>
         <div class="segment">
           <span class="thumb s1" aria-hidden="true"></span>
@@ -370,14 +376,15 @@ td:first-child{font-weight:600}
     <h2>Wait, then download</h2>
     <p>Each job gets a card under the form. A generated clip usually takes two to three minutes, and a talk/action job takes longer with more segments.</p>
     <ul>
-      <li>The three generated modes go <b>Queued → Generating → Finishing</b>. Video → talk/action goes <b>preparing → generating → splicing</b>.</li>
+      <li>The three generated modes go <b>Queued → Generating → Finishing</b>.</li>
+      <li>A Video → talk/action card shows its status in the corner (<b>queued</b>, <b>preparing</b>, <b>generating</b>, <b>splicing</b>, then <b>done</b> or <b>failed</b>) and one line per segment for its <b>audio</b>, <b>words</b>, and <b>animated</b> parts, each ticked ✓ when ready. Action segments have no audio or words, so those two tick right away.</li>
       <li>You can leave the page. If the app restarts, the job picks up where it stopped. A clip that was already generated isn't paid for again.</li>
       <li>When it's done, the card shows a player and a <b>Download</b> link. Animate clips aren't part of blind picks or the Schedule queue, so download one and post it yourself.</li>
       <li>Submitting the exact same job again costs nothing, because every paid call is cached.</li>
     </ul>
     <p class="note">If you asked for sound but the model sent back none, the card says the clip is silent.</p>
   </div>
-  <figure class="frame" aria-label="Mockup: finished Image to video job card">
+  <figure class="frame" aria-label="Mockup: a finished Image to video card and a Video to talk/action card in progress">
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate</div></div>
     <div class="app">
       <div class="card">
@@ -391,8 +398,26 @@ td:first-child{font-weight:600}
         <div class="player s1" role="img" aria-label="Video player"></div>
         <a href="#result">Download</a>
       </div>
+      <div class="card">
+        <div class="card-head"><span class="small muted">cat.mov · 13s source</span><b class="pill end">generating</b></div>
+        <div class="progress mono">
+          <span>segment 1 (3.0s): audio ✓ · words ✓ · animated ✓</span>
+          <span>segment 2 (8.5s): audio ✓ · words ✓ · animated …</span>
+        </div>
+      </div>
     </div>
   </figure>
+</section>
+
+<section class="reqs" id="trouble" aria-labelledby="trouble-h">
+  <h2 id="trouble-h">If something is greyed out or fails</h2>
+  <ul class="trouble">
+    <li><b>Image, Text, and Transition are greyed out in the Mode menu.</b> The AI video service isn't connected to your app yet. Hover a mode to see why, and ask whoever runs your app. Video → talk/action shows the same reason as a message.</li>
+    <li><b>TTS voices or captions are unavailable on a talk segment.</b> They need the app's OpenAI connection. Use <b>Your recording</b> with captions off instead, or ask whoever runs your app.</li>
+    <li><b>Animate is greyed out.</b> Something in the form isn't finished: a file not yet uploaded, a missing prompt or line, images that don't match, or segments out of order. The form says what in red.</li>
+    <li><b>+ Add segment doesn't appear.</b> Click <b>Upload</b> after choosing your video.</li>
+    <li><b>A job failed.</b> The card shows the reason. Fix it if it names your input, then submit the same job again. Anything already generated is reused, so it isn't paid for twice.</li>
+  </ul>
 </section>
 
 <section class="reqs" id="needs" aria-labelledby="needs-h">
