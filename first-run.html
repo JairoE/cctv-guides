@@ -203,6 +203,31 @@ p{margin:0}
 .q .plat{font:11px/1 var(--mono);color:var(--muted)}
 .q li.next{background:var(--surface-2)}
 
+.mini-pill{font:500 10.5px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--warn);background:var(--warn-bg);padding:4px 6px;border-radius:4px}
+.job-head .pill-ok{margin-left:auto}
+.phase-lbl{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px}
+.fs{display:grid;gap:6px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12.5px}
+.fs .legend{font:600 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.radio{display:inline-flex;align-items:center;gap:6px}
+.radio i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--muted);display:inline-block;flex:none}
+.radio.on i{border-color:var(--ink);background:radial-gradient(var(--ink) 40%,transparent 45%)}
+.sel{border:1px solid var(--line);border-radius:5px;padding:2px 6px;background:var(--surface-2);white-space:nowrap}
+.chk-line{display:inline-flex;align-items:center;gap:6px}
+.chk-line .box{width:13px;height:13px;border-radius:3px;border:1.5px solid var(--ink);flex:none}
+.err{font-size:12px;color:var(--gone);margin:0}
+.btn.is-off{opacity:.45}
+.sub-h{font:800 15px/1 var(--display)}
+.q .hp{font:500 10.5px/1 var(--mono);text-transform:uppercase;padding:4px 6px;border-radius:4px;width:58px;text-align:center}
+.q .hp.ok{color:var(--ok);background:var(--ok-bg)}
+.q .hp.bad{color:var(--gone);background:var(--gone-bg)}
+.q.hist .t{white-space:normal}
+
+/* ---------- troubleshooting ---------- */
+.trouble{border-top:1px solid var(--line);padding-block:48px;display:grid;gap:18px;scroll-margin-top:16px}
+.trouble h2{font-size:clamp(26px,3vw,36px);font-weight:850;font-stretch:108%}
+.trouble ul{margin:0;padding-left:1.1em;display:grid;gap:8px;max-width:72ch}
+.trouble li::marker{color:var(--muted)}
+
 /* ---------- retired ---------- */
 .retired{border-top:1px solid var(--line);padding-block:48px;display:grid;gap:24px}
 .retired h2{font-size:clamp(26px,3vw,36px);font-weight:850;font-stretch:108%}
@@ -224,15 +249,15 @@ p{margin:0}
 <header class="hero">
   <span class="eyebrow">ClipDuel · new-user guide · Make clips</span>
   <h1>Turn footage into clips, or text into videos. <span class="hl">Then post.</span></h1>
-  <p class="lede">ClipDuel has two ways to start and one way to finish. Make clips from a long video, or make videos from a script or idea. Either way, you pick what you like, then post it now or schedule one a day. This guide walks through the clip path.</p>
+  <p class="lede">ClipDuel has two ways to start and one way to finish. Make clips from a long video, or make videos from a script or idea, then post to Instagram Reels and TikTok. The one-a-day <b>Schedule</b> queue is built for Make clips. Make videos cards have <b>Post</b> only. This guide walks through the clip path.</p>
   <div class="modes">
-    <a class="mode" href="#upload"><span class="mode-k">Make clips</span><b>From a long video</b><span>Finds the best moments in a podcast, interview, or stream, then captions and reframes them for Reels and TikTok.</span><span class="mode-go">This guide ↓</span></a>
-    <a class="mode" href="text-to-video.html"><span class="mode-k">Make videos</span><b>From a script or an idea</b><span>Storyboards, draws, and narrates your text in up to four art styles, with your own character in every scene.</span><span class="mode-go">Text-to-video guide →</span></a>
+    <a class="mode" href="#upload"><span class="mode-k">Make clips · Post and Schedule</span><b>From a long video</b><span>Finds the best moments in a podcast, interview, or stream, then captions and reframes them for Reels and TikTok.</span><span class="mode-go">This guide ↓</span></a>
+    <a class="mode" href="text-to-video.html"><span class="mode-k">Make videos · Post only</span><b>From a script or an idea</b><span>Storyboards, draws, and narrates your text in up to four art styles, with your own character in every scene.</span><span class="mode-go">Text-to-video guide →</span></a>
   </div>
   <nav class="flow" aria-label="Steps">
     <a href="#upload"><span class="n">1</span>Upload</a><span class="arrow" aria-hidden="true">→</span>
-    <a href="#style"><span class="n">2</span>Pick a caption style <span class="once">once</span></a><span class="arrow" aria-hidden="true">→</span>
-    <a href="#wait"><span class="n">3</span>Let it work</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#wait"><span class="n">2</span>Let it work</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#style"><span class="n">3</span>Pick a caption style <span class="once">first run</span></a><span class="arrow" aria-hidden="true">→</span>
     <a href="#review"><span class="n">4</span>Review clips</a><span class="arrow" aria-hidden="true">→</span>
     <a href="#post"><span class="n">5</span>Post</a><span class="arrow" aria-hidden="true">→</span>
     <a href="#schedule"><span class="n">6</span>Schedule</a>
@@ -246,20 +271,20 @@ p{margin:0}
     <h2>Drop in a long video</h2>
     <p>Podcasts, interviews, talks, and streams work best. The app needs spoken audio, because it finds moments by reading what was said.</p>
     <ul>
-      <li>Choose how many clips you want, from 1 to 5. Your first run is capped at 1 to 3, because it renders every clip in all four caption styles (step 2).</li>
+      <li>Choose how many clips you want, from 1 to 5. Your first run is capped at 1 to 3, because it renders every clip in all four caption styles so you can pick one when it's done (step 3).</li>
       <li>Pick a <b>Format</b>: 9:16 portrait, 1:1 square, or 16:9 landscape. It starts on your saved framing and applies to this run only. Post and Schedule take portrait clips.</li>
-      <li>Your saved caption style is shown in the top bar. Click <b>Caption style ▾</b> to change it.</li>
+      <li>On your first run, the top bar reads <b>Caption style: not chosen yet</b>. You don't choose a style before uploading. After you pick one in step 3, the top bar shows it, and you can click it to change it.</li>
       <li>Uploading the same file again costs nothing. The transcript is cached.</li>
     </ul>
     <p class="note">Cost is about <span class="mono">$0.006</span> per minute of audio, so a 45-minute episode is roughly 27¢.</p>
   </div>
-  <figure class="frame" aria-label="Mockup: Make clips screen">
+  <figure class="frame" aria-label="Mockup: Make clips screen on a first run">
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / make</div></div>
     <div class="app">
       <div class="appbar">
         <span class="brand">ClipDuel</span>
         <div class="tabs"><span class="on">Make clips</span><span>Make videos</span><span>Schedule</span></div>
-        <span class="gear"><span class="swatch" aria-hidden="true"></span>Caption style: Bold Pop ▾</span>
+        <span class="gear"><span class="swatch" aria-hidden="true"></span>Caption style: <b>not chosen yet</b> ▾</span>
       </div>
       <div class="drop">
         <strong>Drop a video file here</strong>
@@ -277,7 +302,7 @@ p{margin:0}
         <label class="field">Format
           <span class="input mono">9:16 portrait ▾</span>
         </label>
-        <span class="muted small" style="flex:1;min-width:160px">Each clip is 9:16, captioned in <b>Bold Pop</b>, cropped to fill.</span>
+        <span class="muted small" style="flex:1;min-width:160px">First run: every clip renders in all four caption styles (9:16).</span>
         <span class="btn accent">Find my clips</span>
       </div>
     </div>
@@ -285,54 +310,16 @@ p{margin:0}
 </section>
 
 <!-- STEP 2 -->
-<section class="step" id="style">
-  <div class="step-copy">
-    <span class="step-num">STEP 2 OF 6 · <span class="tag once">first run only</span></span>
-    <h2>Pick the captions you like, three taps</h2>
-    <p>Your first run renders every moment, up to three, in all four caption styles. You then compare the four versions of the top-scoring moment two at a time, without names, and pick the one that reads better. The winner becomes your default, and the job card keeps only its clips.</p>
-    <ul>
-      <li>Four styles, three picks, done in under a minute.</li>
-      <li>Both sides show the same words, so you judge only the look.</li>
-      <li>Names appear only after the final pick.</li>
-    </ul>
-    <p class="note">This is the only pick in clip mode. From <b>Caption style ▾</b> in the top bar, <b>Rerun setup</b> repeats it on your next job, and <b>Choose directly</b> picks a style by name. Video mode works differently: you pick a favorite from each job.</p>
-  </div>
-  <figure class="frame" aria-label="Mockup: first-run caption style pick">
-    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / make / style</div></div>
-    <div class="app">
-      <div class="appbar">
-        <span class="brand">ClipDuel</span>
-        <span class="gear">Setting up your caption style</span>
-      </div>
-      <div class="center" style="display:grid;gap:8px;justify-items:center">
-        <div class="rounds" aria-label="Round 2 of 3"><i class="done"></i><i class="now"></i><i></i></div>
-        <strong style="font:800 20px/1.1 var(--display)">Which captions read better?</strong>
-        <span class="muted small">Round 2 of 3 · same moment, same words</span>
-      </div>
-      <div class="duel">
-        <div class="side">
-          <div class="clip s1 p-bold" data-cap="You don't need more ideas, you need fewer"><div class="person" aria-hidden="true"></div></div>
-          <span class="btn ghost sm">This one</span>
-        </div>
-        <div class="side">
-          <div class="clip s1 p-pill" data-cap="You don't need more ideas, you need fewer"><div class="person" aria-hidden="true"></div></div>
-          <span class="btn ghost sm">This one</span>
-        </div>
-      </div>
-    </div>
-  </figure>
-</section>
-
-<!-- STEP 3 -->
 <section class="step" id="wait">
   <div class="step-copy">
-    <span class="step-num">STEP 3 OF 6</span>
+    <span class="step-num">STEP 2 OF 6</span>
     <h2>Let it find the moments</h2>
     <p>A job runs in four stages. You can leave the page. The job keeps running and picks up where it stopped if the app restarts.</p>
     <ul>
       <li><b>Transcribe:</b> words with exact timestamps.</li>
       <li><b>Find moments:</b> scores each stretch on hook, flow, value, and trend, then keeps the best ones.</li>
       <li><b>Render:</b> trims, reframes to your format, and burns in captions.</li>
+      <li>On your first run, the card is marked <b>caption setup</b> and each clip reads <b>style hidden until your pick</b>, so your pick in step 3 stays blind.</li>
     </ul>
     <p class="note">A 45-minute video usually takes a few minutes. Most of that is transcription, which is skipped entirely on a re-upload. If a job fails, its card shows <b>Retry</b>, which picks up where it stopped without redoing anything already transcribed or rendered.</p>
   </div>
@@ -344,7 +331,7 @@ p{margin:0}
         <div class="tabs"><span class="on">Make clips</span><span>Make videos</span><span>Schedule</span></div>
       </div>
       <div class="job">
-        <div class="job-head"><strong>podcast-ep12-full.mp4</strong><span class="mono small muted">3 clips · started 2:41 ago</span></div>
+        <div class="job-head"><strong>podcast-ep12-full.mp4</strong><span class="mono small muted">3 clips · started 2:41 ago</span><span class="mini-pill">caption setup</span></div>
         <div class="stages">
           <div class="stage done"><div class="bar"><b></b></div><span class="lbl">Upload</span><span class="sub">45:12 of video</span></div>
           <div class="stage done"><div class="bar"><b></b></div><span class="lbl">Transcribe</span><span class="sub">words + timestamps</span></div>
@@ -359,6 +346,52 @@ p{margin:0}
   </figure>
 </section>
 
+<!-- STEP 3 -->
+<section class="step" id="style">
+  <div class="step-copy">
+    <span class="step-num">STEP 3 OF 6 · <span class="tag once">first run only</span></span>
+    <h2>When it's done, pick your captions</h2>
+    <p>Once your first job finishes, its card shows a <b>Pick your caption style</b> button. Click it to see four versions of the top-scoring moment, two at a time and without names, and pick the one that reads better. Three picks and you're done.</p>
+    <ul>
+      <li>Both sides show the same words, so you judge only the look. While you pick, the card's clips are hidden.</li>
+      <li>Names appear only after the final pick. The card then shows <b>★ Your caption style</b>, and that style becomes your default for new clips.</li>
+      <li><b>Skip for now</b> closes the pick. Your clips stay usable, and the button stays on the card. If you'd started, it reads <b>Resume caption setup</b>.</li>
+      <li>After you choose, the card shows only the winning style's clips. The other three styles are hidden, not deleted.</li>
+    </ul>
+    <p class="note">This is the only pick in clip mode. From <b>Caption style ▾</b> in the top bar, <b>Rerun setup</b> repeats it on your next job, and <b>Choose directly</b> picks a style by name. Video mode works differently: you pick a favorite from each job.</p>
+  </div>
+  <figure class="frame" aria-label="Mockup: first-run caption style pick on a finished job card">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / make</div></div>
+    <div class="app">
+      <div class="job">
+        <div class="job-head"><strong>podcast-ep12-full.mp4</strong><span class="mini-pill">caption setup</span><span class="pill-ok">DONE</span></div>
+        <div class="row" style="align-items:center">
+          <span class="btn">Pick your caption style</span>
+          <span class="muted small">3 blind picks on the top moment · names hidden until you choose</span>
+        </div>
+      </div>
+      <p class="phase-lbl">After you click it</p>
+      <div class="center" style="display:grid;gap:8px;justify-items:center">
+        <span class="eyebrow">Setting up your caption style</span>
+        <div class="rounds" aria-label="Round 2 of 3"><i class="done"></i><i class="now"></i><i></i></div>
+        <strong style="font:800 20px/1.1 var(--display)">Which captions read better?</strong>
+        <span class="muted small">Round 2 of 3 · same moment, same words</span>
+      </div>
+      <div class="duel">
+        <div class="side">
+          <div class="clip s1 p-bold" data-cap="You don't need more ideas, you need fewer"><div class="person" aria-hidden="true"></div></div>
+          <span class="btn ghost sm">This one</span>
+        </div>
+        <div class="side">
+          <div class="clip s1 p-pill" data-cap="You don't need more ideas, you need fewer"><div class="person" aria-hidden="true"></div></div>
+          <span class="btn ghost sm">This one</span>
+        </div>
+      </div>
+      <span class="btn ghost sm" style="justify-self:start">Skip for now</span>
+    </div>
+  </figure>
+</section>
+
 <!-- STEP 4 -->
 <section class="step" id="review">
   <div class="step-copy">
@@ -367,7 +400,8 @@ p{margin:0}
     <p>Each clip shows why it was chosen: its title, its score out of 100, and where it sits in the original video. Play any clip right on the card.</p>
     <ul>
       <li><b>Post</b> publishes now to Instagram Reels, TikTok, or both.</li>
-      <li><b>Schedule</b> adds the clip to your one-a-day queue.</li>
+      <li><b>Schedule</b> adds the clip to your one-a-day queue. Only Make clips cards have it. Make videos cards have <b>Post</b> only.</li>
+      <li>Both buttons are greyed out on square and landscape clips, because only 9:16 clips can be posted.</li>
       <li><b>⋯ → Re-make the whole job in</b> another caption style starts a new job on the same video. It reuses the transcript and the moments, so it costs nothing in AI.</li>
     </ul>
   </div>
@@ -408,13 +442,15 @@ p{margin:0}
   <div class="step-copy">
     <span class="step-num">STEP 5 OF 6</span>
     <h2>Post it, or queue it</h2>
-    <p>Write one caption, pick your platforms, and choose whether it goes out now or joins the daily queue. The same form does both, so there's nothing new to learn.</p>
+    <p>Write one caption, pick your platforms, and choose whether it goes out now or joins the daily queue. The same form does both. <b>Post</b> opens it with <b>Post now</b> as the main button, and <b>Schedule</b> opens it with <b>Add to daily queue</b>.</p>
     <ul>
-      <li><b>Post</b> opens it with <b>Post now</b> as the main button. <b>Schedule</b> opens the same form with <b>Add to daily queue</b> as the main button.</li>
-      <li>Only platforms you've connected can be selected.</li>
-      <li>A post is sent exactly once. If something fails, you retry it yourself, so the same clip never goes out twice.</li>
+      <li><b>Platforms:</b> only accounts you've connected can be ticked.</li>
+      <li><b>Music:</b> <b>Video audio as rendered</b> is the default and works on both platforms. <b>Instagram audio</b> adds a licensed track by its numeric audio ID, on Instagram only. For TikTok's own music, <b>Use TikTok editor music</b> sends the clip to your TikTok inbox, where you finish the post.</li>
+      <li><b>TikTok:</b> for a direct post, <b>Privacy</b> starts on <b>choose…</b>. Pick Everyone, Mutual friends, Followers, or Only me, then tick <b>I confirm TikTok's Music Usage Confirmation</b>. Comments, duet, and stitch start off.</li>
+      <li><b>Post now</b> and <b>Add to daily queue</b> stay greyed out until those are set. What's missing shows in red above the buttons.</li>
+      <li>After you post, each platform gets a status line: <b>queued…</b>, <b>publishing…</b>, <b>published ✓</b>, or <b>failed</b> with the reason.</li>
     </ul>
-    <p class="note">Posting needs your Instagram and TikTok tokens plus a public URL set in the app's config. Until then, the Post button explains what's missing.</p>
+    <p class="note">A post is sent exactly once and is never retried on its own, so the same clip can't go out twice. To retry a failed post, press <b>Post now</b> again.</p>
   </div>
   <figure class="frame" aria-label="Mockup: post composer">
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / make</div></div>
@@ -431,9 +467,21 @@ p{margin:0}
             <div class="textarea">Stop collecting ideas. Start finishing one. 🎙 Full ep 12 in bio</div>
           </label>
           <div class="count">62 / 2,200</div>
+          <div class="fs">
+            <span class="legend">Music</span>
+            <span class="radio on"><i></i>Video audio as rendered</span>
+            <span class="radio"><i></i>Instagram audio (Instagram only)</span>
+          </div>
+          <div class="fs">
+            <span class="legend">TikTok</span>
+            <div class="row" style="gap:8px;align-items:center"><span class="small">Post as: <span class="sel">direct post ▾</span></span><span class="small">Privacy: <span class="sel">choose… ▾</span></span></div>
+            <span class="chk-line"><span class="box"></span>I confirm TikTok's Music Usage Confirmation</span>
+          </div>
+          <p class="err">Choose a TikTok privacy level before direct posting.</p>
+          <p class="err">Confirm TikTok's Music Usage Confirmation before posting.</p>
           <div class="row" style="justify-content:flex-end">
-            <span class="btn ghost sm">Add to daily queue</span>
-            <span class="btn sm">Post now</span>
+            <span class="btn ghost sm is-off">Add to daily queue</span>
+            <span class="btn sm is-off">Post now</span>
           </div>
         </div>
       </div>
@@ -446,11 +494,14 @@ p{margin:0}
   <div class="step-copy">
     <span class="step-num">STEP 6 OF 6</span>
     <h2>Let the queue post one a day</h2>
-    <p>Turn the daily queue on, pick a time, and it posts the oldest clip in the queue once a day. Posted clips leave the queue. If the queue is empty, nothing posts.</p>
+    <p>Turn the daily queue on, pick a time, and click <b>Save</b>. Nothing changes until you save: the line under the settings says <b>unsaved changes</b> until you do, then shows when the next post goes out. Each day at that time, the oldest clip in the queue posts.</p>
     <ul>
-      <li>First in, first out. Remove any clip before it goes out.</li>
-      <li>Change the time at any point. The next post follows the new time.</li>
+      <li>First in, first out. <b>Remove</b> any clip before it goes out.</li>
+      <li>Change the time at any point, then click <b>Save</b>. The next post follows the new time.</li>
+      <li>If the queue is empty, nothing posts.</li>
+      <li><b>History</b> lists what already went out, newest first. Each item reads <b>fired</b> or <b>failed</b>, with each platform's result and the reason if one failed.</li>
     </ul>
+    <p class="note">You fill the queue with the <b>Schedule</b> button on Make clips cards. Make videos cards have no Schedule button, but their Post form also has <b>Add to daily queue</b>.</p>
   </div>
   <figure class="frame" aria-label="Mockup: schedule screen">
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / schedule</div></div>
@@ -465,23 +516,43 @@ p{margin:0}
           <strong>Post one clip a day at</strong>
           <span class="input mono">09:00</span>
           <span class="muted small">your computer's time zone</span>
+          <span class="btn sm">Save</span>
+          <span class="muted small" style="flex-basis:100%">Next post: 10/17, 9:00 AM · unsaved changes</span>
         </div>
+        <strong class="sub-h">Queued (3)</strong>
         <ul class="q">
-          <li class="next"><span class="when">Tomorrow</span><span class="mini clip s1"></span><span class="t">Fewer ideas, better ideas</span><span class="plat">IG · TT</span></li>
-          <li><span class="when">Sat 27</span><span class="mini clip s2"></span><span class="t">The 5-minute rule</span><span class="plat">IG · TT</span></li>
-          <li><span class="when">Sun 28</span><span class="mini clip s3"></span><span class="t">Why I quit posting daily</span><span class="plat">TT</span></li>
-          <li><span class="when">Mon 29</span><span class="mini clip s4"></span><span class="t">Ep 11 · The cold open that worked</span><span class="plat">IG</span></li>
+          <li class="next"><span class="when">Tomorrow</span><span class="mini clip s1"></span><span class="t">Stop collecting ideas. Start finishing one.</span><span class="plat">IG · TT</span></li>
+          <li><span class="when">Sun 18</span><span class="mini clip s2"></span><span class="t">Five minutes is all it takes</span><span class="plat">IG · TT</span></li>
+          <li><span class="when">Mon 19</span><span class="mini clip s3"></span><span class="t">Why I quit posting daily</span><span class="plat">TT</span></li>
+        </ul>
+        <strong class="sub-h">History</strong>
+        <ul class="q hist">
+          <li><span class="hp ok">fired</span><span class="mini clip s4"></span><span class="t">The cold open that worked<br><span class="muted small">Instagram: published ✓ · TikTok: published ✓</span></span><span class="plat">IG · TT</span></li>
+          <li><span class="hp bad">failed</span><span class="mini clip s2"></span><span class="t">Ep 11 teaser<br><span class="muted small">TikTok: failed, with the reason</span></span><span class="plat">TT</span></li>
         </ul>
       </div>
     </div>
   </figure>
 </section>
 
+<section class="trouble" aria-labelledby="trouble-h">
+  <h2 id="trouble-h">If something is greyed out or fails</h2>
+  <ul>
+    <li><b>Make clips shows a message instead of the upload form.</b> Clip-making needs the app's AI transcription service, which isn't connected yet. Ask whoever runs your app.</li>
+    <li><b>Post or Schedule is greyed out.</b> Either the clip isn't 9:16, or no Instagram or TikTok account is connected yet. Hover the button to see which.</li>
+    <li><b>Post now is greyed out.</b> The form lists what's missing in red: a platform, the TikTok privacy level, the music confirmation, an Instagram audio ID, or a shorter caption.</li>
+    <li><b>A job failed.</b> Press <b>Retry</b> on its card. It picks up where it stopped and redoes nothing already finished.</li>
+    <li><b>A post failed.</b> The status line under the form says why. Fix that, then press <b>Post now</b> again.</li>
+    <li><b>A scheduled post failed.</b> History shows which platform failed and why. Schedule the clip again, or post it from its card.</li>
+    <li><b>The caption pick says it can't continue.</b> Choose a style by name from <b>Caption style ▾ → Choose directly</b>.</li>
+  </ul>
+</section>
+
 <section class="retired" aria-labelledby="labs-h">
   <div style="display:grid;gap:10px">
     <span class="eyebrow">One more tab, off by default</span>
     <h2 id="labs-h">Animate (Labs)</h2>
-    <p class="muted" style="max-width:62ch">The app has three tabs: Make clips, Make videos, and Schedule. A fourth, <b>Animate (Labs)</b>, appears only when the server sets <span class="mono">ANIMATE_ENABLED=true</span>, because it calls a paid AI video service and needs an inference.sh key.</p>
+    <p class="muted" style="max-width:62ch">The app has three tabs: Make clips, Make videos, and Schedule. A fourth, <b>Animate (Labs)</b>, appears only when it's turned on for your app, because it uses a paid AI video service.</p>
   </div>
   <div class="gone-grid">
     <div class="gone"><span class="chip lab">Labs</span><h3>Image, Text, Transition</h3><p>Animate a photo, make a shot from a prompt, or move from one image to another. Each job makes one short clip.</p></div>
