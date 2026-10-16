@@ -207,29 +207,6 @@ a{color:inherit}
 .scenes .d{font:11.5px var(--mono);color:var(--muted);white-space:nowrap}
 .scenes .why{grid-column:2/-1;font:11px var(--mono);color:var(--muted)}
 
-/* pipeline diagram */
-.sys{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.sys-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface-2)}
-.sys-controls button{font:600 13px/1 var(--body);padding:8px 12px;border-radius:7px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
-.sys-controls button.primary{background:var(--ink);color:var(--surface);border-color:var(--ink)}
-.steps-dots{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap}
-.steps-dots button{width:28px;height:26px;padding:0;font:600 11.5px/1 var(--mono)}
-.steps-dots button[aria-current="step"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.sys-canvas{overflow-x:auto}
-.sys svg{display:block;width:100%;min-width:760px;height:auto}
-.sys .n rect{fill:var(--node);stroke:var(--node-line);stroke-width:1.2;transition:stroke .25s,fill .25s}
-.sys .n text{fill:var(--ink);font:600 12px var(--body)}
-.sys .n text.s{fill:var(--muted);font:10.5px var(--mono)}
-.sys .n.active rect{stroke:var(--ink);stroke-width:2.2;fill:var(--accent-soft)}
-.sys .grp{fill:none;stroke:var(--line);stroke-dasharray:3 4}
-.sys .grp-t{fill:var(--muted);font:600 10px var(--mono);letter-spacing:.1em}
-.sys path.e{fill:none;stroke:var(--edge);stroke-width:1.5;transition:stroke .25s}
-.sys path.e.active{stroke:var(--ink);stroke-width:2.4}
-.sys .token{fill:var(--accent);stroke:var(--ink);stroke-width:1.5}
-.sys-caption{padding:14px 16px;border-top:1px solid var(--line);display:grid;gap:6px;min-height:150px}
-.sys-caption .t{font-weight:700}
-.sys-caption pre{margin:4px 0 0;font:12.5px/1.55 var(--mono);white-space:pre-wrap;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:var(--muted)}
-
 /* rules table */
 .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:14px}
@@ -348,7 +325,7 @@ td .why{color:var(--muted);font-size:13px}
     <div class="sw"><div class="t t-line"></div>2D Line<small>flat outline</small></div>
     <div class="sw"><div class="t t-econ"></div>Economic<small>infographic</small></div>
   </div>
-  <p class="foot-note">Swatches suggest each preset's mood; they are not renders. With procedural imagery, a preset draws seeded SVG motifs for free. With AI imagery, the preset's art-direction text steers the image model. Each preset also carries its own caption typography.</p>
+  <p class="foot-note">Swatches suggest each preset's mood; they are not renders. With procedural imagery, a preset draws its own motifs for free. With AI imagery, the preset sets the art direction for the AI images. Each preset also carries its own caption typography.</p>
 </section>
 
 <!-- STEP 3 -->
@@ -376,7 +353,7 @@ td .why{color:var(--muted);font-size:13px}
         <figure><div class="scene v-clay"><div class="bg"></div><svg class="cat" viewBox="0 0 100 100"><use href="#cat"/></svg><div class="cap">The boats wait, <span class="acc">patient</span> as old dogs.</div></div><figcaption>Claymation</figcaption></figure>
         <figure><div class="scene v-water"><div class="bg"></div><svg class="cat" viewBox="0 0 100 100"><use href="#cat"/></svg><div class="cap">The boats wait, <span class="acc">patient</span> as old dogs.</div></div><figcaption>Watercolor</figcaption></figure>
       </div>
-<div class="desc"><b>subject description (vision, cached)</b>
+<div class="desc"><b>subject description</b>
 A small cat with a white body and a gray tabby saddle across the back and the top of the head, short fur, and amber eyes.</div>
     </div>
   </figure>
@@ -406,7 +383,7 @@ A small cat with a white body and a gray tabby saddle across the back and the to
         <figure><div class="scene v-synth"><div class="bg"></div><svg class="cat" viewBox="0 0 100 100"><use href="#cat"/></svg><div class="cap">When the wind <span class="acc">shifts</span>, they move. She stays.</div></div><figcaption>Style reference</figcaption></figure>
         <figure><div class="scene v-clay"><div class="bg"></div><svg class="cat" viewBox="0 0 100 100"><use href="#cat"/></svg><div class="cap">When the wind <span class="acc">shifts</span>, they move. She stays.</div></div><figcaption>Claymation</figcaption></figure>
       </div>
-<div class="desc"><b>style description (vision, cached)</b>
+<div class="desc"><b>style description</b>
 Retro synthwave digital illustration: deep purple to magenta dusk gradient, neon rim lighting, glowing cyan perspective grid, flat gradient shading, crisp vector edges.</div>
     </div>
   </figure>
@@ -429,9 +406,8 @@ Retro synthwave digital illustration: deep purple to magenta dusk gradient, neon
       <div class="filerow"><span class="check"><i>✓</i>Narration</span><span class="slider"><span class="track"><b style="width:100%"></b></span>100%</span></div>
       <div class="filerow"><span class="lbl">Background music (optional):</span><span class="chip">♪ harbor-lofi.mp3</span><span class="slider"><span class="track"><b style="width:40%"></b></span>40%</span><span class="btn ghost sm">remove</span></div>
 <div class="desc"><b>mix, per video</b>
-narration ×1.00 ─┐
-                 ├─ amix (normalize off) ─→ ends with the narration
-music    ×0.40 ─┘   looped · 2 s fade-out · no ducking</div>
+narration at 100% · music at 40% under it
+music loops to fit and fades out over the last 2 s</div>
     </div>
   </figure>
 </section>
@@ -486,84 +462,6 @@ music    ×0.40 ─┘   looped · 2 s fade-out · no ducking</div>
   </div>
 </section>
 
-<!-- PIPELINE -->
-<section class="sec" id="pipeline" aria-labelledby="pipe-h">
-  <span class="eyebrow">Under the hood</span>
-  <h2 id="pipe-h">What happens after you press Render</h2>
-  <p>The request only validates and queues. All the slow and paid work happens in one background worker, and every paid call is checked against a cache first. Step through the example job: three videos, a brief, a cat photo, a synthwave style image, and a music track.</p>
-  <figure class="sys" id="sys" style="margin:0">
-    <div class="sys-controls">
-      <button type="button" id="sys-play" class="primary" aria-pressed="false">Play</button>
-      <button type="button" id="sys-prev" aria-label="Previous step">← Prev</button>
-      <button type="button" id="sys-next" aria-label="Next step">Next →</button>
-      <div class="steps-dots" id="sys-dots" role="group" aria-label="Jump to step"></div>
-    </div>
-    <div class="sys-canvas">
-    <svg viewBox="0 0 1000 500" role="img" aria-labelledby="pipe-title">
-      <title id="pipe-title">Text-to-video pipeline: browser, POST /render-jobs, render_jobs, the local-render worker's job prep, per-scene loop and assembly, OpenAI, local tools, MEDIA_DIR, and clips and pairs</title>
-      <rect class="grp" x="362" y="92" width="448" height="336" rx="10"/>
-      <text class="grp-t" x="374" y="110">LOCAL-RENDER WORKER</text>
-      <text class="grp-t" x="380" y="124">JOB PREP · ONCE</text>
-      <text class="grp-t" x="380" y="240">PER SCENE · × 6</text>
-      <text class="grp-t" x="380" y="362">ASSEMBLE · PER VIDEO × 3</text>
-
-      <path class="e" id="e_submit" d="M140 250 L170 250"/>
-      <path class="e" id="e_store" d="M330 238 C350 238 350 45 370 45"/>
-      <path class="e" id="e_row" d="M250 275 L250 330"/>
-      <path class="e" id="e_enq" d="M330 345 C352 345 356 150 380 150"/>
-      <path class="e" id="e_script_ai" d="M445 132 C445 98 915 98 915 132"/>
-      <path class="e" id="e_script_row" d="M380 162 C356 162 352 356 330 356"/>
-      <path class="e" id="e_subj_ai" d="M585 132 C585 104 900 104 905 132"/>
-      <path class="e" id="e_style_ai" d="M725 132 C725 112 890 112 895 132"/>
-      <path class="e" id="e_refs_media" d="M650 132 L650 70"/>
-      <path class="e" id="e_plan_ai" d="M650 200 L850 200"/>
-      <path class="e" id="e_card_ai" d="M475 252 C475 228 820 228 850 222"/>
-      <path class="e" id="e_card_comp" d="M570 270 L600 270"/>
-      <path class="e" id="e_comp_tools" d="M790 270 C820 270 822 318 850 318"/>
-      <path class="e" id="e_voice_ai" d="M475 304 C475 296 915 297 915 258"/>
-      <path class="e" id="e_voice_tools" d="M475 340 C475 354 830 358 850 352"/>
-      <path class="e" id="e_voice_kb" d="M570 322 L600 322"/>
-      <path class="e" id="e_kb_tools" d="M790 322 L850 330"/>
-      <path class="e" id="e_kb_concat" d="M695 340 C695 362 475 360 475 378"/>
-      <path class="e" id="e_concat_xfade" d="M570 396 L600 396"/>
-      <path class="e" id="e_xfade_media" d="M790 396 C992 396 992 45 980 45"/>
-      <path class="e" id="e_pairs" d="M600 404 C500 455 400 452 330 452"/>
-      <path class="e" id="e_back" d="M170 452 C110 452 80 330 80 290"/>
-
-      <g class="n" id="n_browser"><rect x="20" y="210" width="120" height="80" rx="10"/><text x="32" y="234">Browser</text><text class="s" x="32" y="254">Submit form</text><text class="s" x="32" y="270">Pick · Post</text></g>
-      <g class="n" id="n_route"><rect x="170" y="225" width="160" height="50" rx="8"/><text x="182" y="246">POST /render-jobs</text><text class="s" x="182" y="264">validate · store · queue</text></g>
-      <g class="n" id="n_rjobs"><rect x="170" y="330" width="160" height="40" rx="8"/><text x="182" y="355">render_jobs</text></g>
-      <g class="n" id="n_pairs"><rect x="170" y="432" width="160" height="40" rx="8"/><text x="182" y="457">clips · pairs</text></g>
-      <g class="n" id="n_media"><rect x="370" y="20" width="610" height="50" rx="10"/><text x="384" y="41">MEDIA_DIR</text><text class="s" x="384" y="59">reference-images/&lt;sha&gt;.png · music/&lt;sha&gt;.mp3 · .ai-cache/ · &lt;clipId&gt;.mp4</text></g>
-
-      <g class="n" id="n_script"><rect x="380" y="132" width="130" height="36" rx="7"/><text x="392" y="149">write script</text><text class="s" x="392" y="162">brief mode only</text></g>
-      <g class="n" id="n_subj"><rect x="520" y="132" width="130" height="36" rx="7"/><text x="532" y="149">describe subject</text><text class="s" x="532" y="162">character photo</text></g>
-      <g class="n" id="n_style"><rect x="660" y="132" width="130" height="36" rx="7"/><text x="672" y="149">describe style</text><text class="s" x="672" y="162">style image</text></g>
-      <g class="n" id="n_plan"><rect x="520" y="182" width="130" height="36" rx="7"/><text x="532" y="199">scene prompts</text><text class="s" x="532" y="212">1 per style</text></g>
-
-      <g class="n" id="n_card"><rect x="380" y="252" width="190" height="36" rx="7"/><text x="392" y="269">scene image</text><text class="s" x="392" y="282">SVG · or AI generate/edit</text></g>
-      <g class="n" id="n_comp"><rect x="600" y="252" width="190" height="36" rx="7"/><text x="612" y="269">caption composite</text><text class="s" x="612" y="282">accent word highlighted</text></g>
-      <g class="n" id="n_voice"><rect x="380" y="304" width="190" height="36" rx="7"/><text x="392" y="321">voice</text><text class="s" x="392" y="334">say · TTS · or silence</text></g>
-      <g class="n" id="n_kb"><rect x="600" y="304" width="190" height="36" rx="7"/><text x="612" y="321">Ken Burns encode</text><text class="s" x="612" y="334">timed to the audio</text></g>
-
-      <g class="n" id="n_concat"><rect x="380" y="378" width="190" height="36" rx="7"/><text x="392" y="395">audio + music mix</text><text class="s" x="392" y="408">0.35 s gaps · loop · fade</text></g>
-      <g class="n" id="n_xfade"><rect x="600" y="378" width="190" height="36" rx="7"/><text x="612" y="395">crossfade → MP4</text><text class="s" x="612" y="408">0.5 s xfade · 30 fps</text></g>
-
-      <g class="n" id="n_openai"><rect x="850" y="132" width="130" height="126" rx="10"/><text x="862" y="154">OpenAI</text><text class="s" x="862" y="176">gpt-5-nano</text><text class="s" x="862" y="194">vision</text><text class="s" x="862" y="212">gpt-image-1-mini</text><text class="s" x="862" y="230">gpt-4o-mini-tts</text></g>
-      <g class="n" id="n_tools"><rect x="850" y="300" width="130" height="66" rx="10"/><text x="862" y="322">Local tools</text><text class="s" x="862" y="340">say · sharp</text><text class="s" x="862" y="356">ffmpeg</text></g>
-
-      <circle class="token" id="token" r="7" cx="140" cy="250"/>
-    </svg>
-    </div>
-    <div class="sys-caption" aria-live="polite">
-      <span class="eyebrow" id="sys-step">Step 1 of 8</span>
-      <span class="t" id="sys-t"></span>
-      <p id="sys-d" style="max-width:none"></p>
-      <pre id="sys-data"></pre>
-    </div>
-  </figure>
-</section>
-
 <!-- RULES + COST -->
 <section class="sec" id="rules" aria-labelledby="rules-h">
   <span class="eyebrow">Guardrails</span>
@@ -576,23 +474,23 @@ music    ×0.40 ─┘   looped · 2 s fade-out · no ducking</div>
       <tr><td>Add a style image, but no video's style is Style reference</td><td class="why">Nothing would use it.</td></tr>
       <tr><td>Pick Style reference without uploading a style image</td><td class="why">There's no style to describe.</td></tr>
       <tr><td>Pick Style reference with procedural imagery</td><td class="why">The style description only steers the AI image model.</td></tr>
-      <tr><td>Choose “AI writes the script,” AI imagery, or an OpenAI voice without an OpenAI key</td><td class="why">It would otherwise fall back to something you didn't ask for.</td></tr>
+      <tr><td>Choose “AI writes the script,” AI imagery, or an OpenAI voice when OpenAI isn't connected to the app</td><td class="why">It would otherwise fall back to something you didn't ask for.</td></tr>
       <tr><td>Turn narration off, with videos that differ only in voice</td><td class="why">Voice is silent, so the videos would be identical and picking between them meaningless.</td></tr>
       <tr><td>Upload music over 15 MB or not MP3/M4A/WAV, or an image over 8 MB or not PNG/JPEG/WebP</td><td class="why">Files are checked by their real contents, not their names.</td></tr>
     </tbody>
   </table></div>
   <div class="cost">
-    <div><b>$0</b><span>Procedural imagery and a Mac voice. Fully local, with no key required.</span></div>
-    <div><b>≈$0.03</b><span>Per AI video of about 4 scenes: one prompt plan, scene images at low quality, and TTS.</span></div>
-    <div><b>$0</b><span>Any re-run, resume, or identical re-submit. Every paid result is cached by its inputs.</span></div>
+    <div><b>$0</b><span>Procedural imagery and a Mac voice. Fully local, with no AI service needed.</span></div>
+    <div><b>≈$0.03</b><span>Per AI video of about 4 scenes: AI scene images and an AI voice.</span></div>
+    <div><b>$0</b><span>Any re-run, resume, or identical re-submit. Every paid result is saved and reused.</span></div>
   </div>
-  <p class="foot-note">Model names are the app's cheap testing defaults and can be changed in config. The subject and style descriptions shown in steps 3–4 are illustrative. The acceptance runs that verified this path, including the cat and synthwave job, are recorded in the repo's <span class="mono">docs/text-to-video-controls.md</span> and <span class="mono">docs/adding-ai-layers.md</span>. The pipeline on this page is built and verified. The tab layout and the blind pick on the job card shipped with the two-mode app in September 2026.</p>
+  <p class="foot-note">The subject and style descriptions shown in steps 3–4 are illustrative.</p>
 </section>
 
 </div>
 
 <script>
-/* ---------- live storyboard: a port of server/src/renderer/storyboard.ts ---------- */
+/* ---------- live storyboard: the app's scene-splitting rules ---------- */
 (function(){
   var MAX = 18, MIN = 4;
   var STOP = new Set(("a an and are as at be but by for from has have he her his i if in is it its me my no not of on or our she so that the their them they this to us was we were what when which who will with you your").split(" "));
@@ -651,83 +549,6 @@ music    ×0.40 ─┘   looped · 2 s fade-out · no ducking</div>
   }
   input.addEventListener("input", render);
   render();
-})();
-
-/* ---------- animated pipeline ---------- */
-(function(){
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var STEPS = [
-    {t:"Submit: validate, store, queue", nodes:["n_browser","n_route","n_media","n_rjobs"], edges:["e_submit","e_store","e_row"],
-     d:"The form sends one JSON request with the photo, style image, and song inside it. The route checks every rejection rule, verifies each file by its real bytes, and stores it under its content hash, so an identical upload is stored once. It then writes a render_jobs row and queues the job. The route itself never calls OpenAI.",
-     data:"brief 22 words · scriptMode \"generate\" · 3 treatments\nmochi.jpg  → reference-images/1a8f….png  (PNG, ≤1024 px, EXIF stripped)\nsynthwave.png → reference-images/7c02….png\nharbor-lofi.mp3 → music/e41d….mp3  (ffprobe-validated)"},
-    {t:"Write the script (brief mode only)", nodes:["n_rjobs","n_script","n_openai"], edges:["e_enq","e_script_ai","e_script_row"],
-     d:"The worker picks up the job. Because the text is a brief, gpt-5-nano writes the narration: plain spoken prose aimed at 60–120 words and clamped to 450 at a sentence boundary. It is saved to the job row, so a resume or retry reuses it and all three videos narrate identical words.",
-     data:"cache check (script, model, instructions, brief) → miss → gpt-5-nano\n→ 63-word script → render_jobs.narration_script"},
-    {t:"Describe the references", nodes:["n_subj","n_style","n_openai","n_media"], edges:["e_subj_ai","e_style_ai","e_refs_media"],
-     d:"Two vision calls. One describes what the cat looks like and nothing about its pose. The other describes the style image's medium, palette, texture, and lighting, with subject nouns banned. Each is cached by the image's hash plus the instruction text, so editing the instructions regenerates them.",
-     data:"subject: \"white body, gray tabby saddle, amber eyes…\"   ≈$0.001\nstyle:   \"synthwave: purple→magenta dusk, neon rim light, cyan grid…\""},
-    {t:"Plan every scene's image", nodes:["n_plan","n_openai"], edges:["e_plan_ai"],
-     d:"The script is cut into scenes without AI (try it above). Then one structured-output call per style writes a shared continuity bible plus one image prompt per scene. It must restate the subject description word for word, never put text in the image, and keep the lower 30% calm so captions stay readable.",
-     data:"6 scenes × 3 styles → 3 prompt plans (claymation, reference, watercolor)\n{ continuity: \"…\", scenes: [{ index: 0, imagePrompt: \"…\" }, …] }"},
-    {t:"Draw each scene and bake its caption", nodes:["n_card","n_comp","n_openai","n_tools"], edges:["e_card_ai","e_card_comp","e_comp_tools"],
-     d:"With a character photo, each AI scene uses the image edits endpoint with the photo attached. Procedural scenes are seeded SVG, free and identical on every run. Either way sharp cover-fits the image with zoom headroom, then composites the caption in the style's own typography, with the scene's accent word highlighted.",
-     data:"portrait scene: 1024×1536 → cover 1350×2400 (1.25× headroom for Ken Burns)\ncaption: \"The boats wait, [patient] as old dogs.\""},
-    {t:"Voice each scene, then add motion", nodes:["n_voice","n_kb","n_openai","n_tools"], edges:["e_voice_ai","e_voice_tools","e_voice_kb","e_kb_tools"],
-     d:"An openai:nova voice produces a cached MP3, and a Mac voice produces AIFF via say. With narration off, each scene gets silence timed at words ÷ 2.5 seconds. ffprobe measures the real audio, and that length sets how long the scene's slow Ken Burns zoom runs.",
-     data:"scene 2: 7 words → nova mp3 2.9 s → zoompan 30 fps for 2.9 s"},
-    {t:"Mix audio and assemble the video", nodes:["n_concat","n_xfade","n_tools","n_media"], edges:["e_kb_concat","e_concat_xfade","e_xfade_media"],
-     d:"Scene audio is joined with 0.35 s gaps, and the song is looped under it at 40% with a 2 s fade-out. Scenes crossfade for 0.5 s. The finished MP4 is written to scratch, then atomically renamed into MEDIA_DIR, so a crash never leaves a half-written video.",
-     data:"narration ×1.00 + music ×0.40 (amix normalize=0) → 0:31\n→ MEDIA_DIR/3f9e….mp4"},
-    {t:"Pair the videos, pick a favorite, and post", nodes:["n_pairs","n_browser"], edges:["e_pairs","e_back"],
-     d:"With 3 videos there are C(3,2) = 3 pairs. Here the videos differ only in style, so every pair is a clean comparison on style. The job turns ready, and the job card offers a blind knockout: two picks for three videos. The winning look is saved as your next job's default, and portrait videos can be posted.",
-     data:"pairs: claymation↔reference, claymation↔watercolor, reference↔watercolor\nmode \"clean_compare\" · ab_field \"style\"\n2 blind picks → winner \"reference\" → preselected next time"}
-  ];
-  var svg = document.querySelector("#sys svg"), token = document.getElementById("token");
-  var dots = document.getElementById("sys-dots"), playBtn = document.getElementById("sys-play");
-  var cur = 0, playing = false, animId = 0, timer = null;
-  STEPS.forEach(function(s, i){
-    var b = document.createElement("button"); b.type = "button"; b.textContent = String(i + 1);
-    b.setAttribute("aria-label", "Step " + (i + 1) + ": " + s.t);
-    b.addEventListener("click", function(){ stop(); show(i, true); });
-    dots.appendChild(b);
-  });
-  function show(i, anim){
-    cur = (i + STEPS.length) % STEPS.length; var s = STEPS[cur];
-    svg.querySelectorAll(".n.active").forEach(function(n){ n.classList.remove("active"); });
-    svg.querySelectorAll("path.e.active").forEach(function(p){ p.classList.remove("active"); });
-    s.nodes.forEach(function(id){ var n = document.getElementById(id); if (n) n.classList.add("active"); });
-    s.edges.forEach(function(id){ var p = document.getElementById(id); if (p) p.classList.add("active"); });
-    document.getElementById("sys-step").textContent = "Step " + (cur + 1) + " of " + STEPS.length;
-    document.getElementById("sys-t").textContent = s.t;
-    document.getElementById("sys-d").textContent = s.d;
-    document.getElementById("sys-data").textContent = s.data;
-    Array.prototype.forEach.call(dots.children, function(b, j){ if (j === cur) b.setAttribute("aria-current","step"); else b.removeAttribute("aria-current"); });
-    run(s.edges, anim);
-  }
-  function place(p, len){ var pt = p.getPointAtLength(len); token.setAttribute("cx", pt.x); token.setAttribute("cy", pt.y); }
-  function run(ids, anim){
-    cancelAnimationFrame(animId);
-    var paths = ids.map(function(id){ return document.getElementById(id); }).filter(Boolean);
-    if (!paths.length) return;
-    if (reduce || !anim){ var l = paths[paths.length - 1]; place(l, l.getTotalLength()); return; }
-    var k = 0, start = null, per = 750;
-    function frame(ts){
-      if (start === null) start = ts;
-      var p = paths[k], t = Math.min(1, (ts - start) / per), e = t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
-      place(p, e * p.getTotalLength());
-      if (t >= 1){ k++; start = null; if (k >= paths.length) return; }
-      animId = requestAnimationFrame(frame);
-    }
-    animId = requestAnimationFrame(frame);
-  }
-  function schedule(){ clearTimeout(timer); var ms = Math.max(3600, STEPS[cur].edges.length * 750 + 2200);
-    timer = setTimeout(function(){ if (!playing) return; show(cur + 1, true); schedule(); }, ms); }
-  function play(){ playing = true; playBtn.textContent = "Pause"; playBtn.setAttribute("aria-pressed","true"); show(cur, true); schedule(); }
-  function stop(){ playing = false; clearTimeout(timer); playBtn.textContent = "Play"; playBtn.setAttribute("aria-pressed","false"); }
-  playBtn.addEventListener("click", function(){ playing ? stop() : play(); });
-  document.getElementById("sys-prev").addEventListener("click", function(){ stop(); show(cur - 1, true); });
-  document.getElementById("sys-next").addEventListener("click", function(){ stop(); show(cur + 1, true); });
-  show(0, false);
 })();
 </script>
 

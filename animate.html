@@ -133,10 +133,6 @@ a{color:inherit}
 .s2{--scene:linear-gradient(170deg,#3B2F4A 0%,#7A5C8E 50%,#E0A96D 100%)}
 .s3{--scene:linear-gradient(165deg,#1D3B34 0%,#3C7A68 50%,#C9B27C 100%)}
 
-/* env block */
-.env{font:12.5px/1.75 var(--mono);background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;white-space:pre;color:var(--ink)}
-.env .c{color:var(--muted)}
-
 /* talk/action segment */
 .segment{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;border:1px solid var(--line);border-radius:8px;padding:10px}
 .segment .thumb{width:72px}
@@ -177,7 +173,7 @@ td:first-child{font-weight:600}
   <div class="facts">
     <span><b>Output</b> one MP4 per job</span>
     <span><b>Cost</b> ≈ $0.07–$0.15 per generated second</span>
-    <span><b>Needs</b> an inference.sh key</span>
+    <span><b>Needs</b> the tab turned on for your app</span>
     <span><b>Tab</b> Animate (Labs)</span>
   </div>
   <div class="modes">
@@ -187,7 +183,7 @@ td:first-child{font-weight:600}
     <a class="mode" href="#video"><span class="mode-k">Video → talk/action</span><b>Bring your footage to life</b><span>Pick up to three moments in your own video. The subject talks or acts, then your footage carries on.</span><span class="mode-go">Jump ↓</span></a>
   </div>
   <nav class="flow" aria-label="Sections">
-    <a href="#setup"><span class="n">0</span>Turn it on</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#setup"><span class="n">0</span>Find the tab</a><span class="arrow" aria-hidden="true">→</span>
     <a href="#image"><span class="n">1</span>Image to video</a><span class="arrow" aria-hidden="true">·</span>
     <a href="#text"><span class="n">2</span>Text to video</a><span class="arrow" aria-hidden="true">·</span>
     <a href="#transition"><span class="n">3</span>AI Transition</a><span class="arrow" aria-hidden="true">·</span>
@@ -200,24 +196,17 @@ td:first-child{font-weight:600}
 <section class="step" id="setup">
   <div class="step-copy">
     <span class="step-num">BEFORE YOU START · <span class="tag">labs</span></span>
-    <h2>Turn the tab on</h2>
-    <p>Animate calls a paid video service, so it stays off until you turn it on in the server's <span class="mono">.env</span> file.</p>
+    <h2>Find the tab</h2>
+    <p>Animate uses a paid AI video service, so it's off by default. When it's turned on for your app, a fourth tab, <b>Animate (Labs)</b>, appears after Schedule.</p>
     <ul>
-      <li><b>ANIMATE_ENABLED=true</b> adds the Animate tab. While it's off, the tab doesn't appear and the server doesn't set up anything for it.</li>
-      <li><b>INFSH_API_KEY</b> is your inference.sh key. Install its CLI with <span class="mono">brew install inference-sh/tap/belt</span>. Without a key, the tab shows but can't run: the three generated modes are greyed out in the <b>Mode</b> menu, and Video → talk/action shows a message naming the missing key.</li>
-      <li>With a key set, the server checks at startup that the CLI runs and that the configured models are ones it knows. If either check fails, the server won't start, and it names the setting to fix.</li>
-      <li><b>OpenAI</b> is needed only for a talk segment's TTS voice or captions. The other three modes never use it.</li>
+      <li>If the video service isn't connected yet, the tab still shows but can't run: the three generated modes are greyed out in the <b>Mode</b> menu, and Video → talk/action shows a message saying what's missing.</li>
+      <li>A talk segment's TTS voice and captions use OpenAI. The other three modes don't.</li>
     </ul>
-    <p class="note">Restart <span class="mono">pnpm dev</span> after editing <span class="mono">.env</span>. The <b>Mode</b> menu starts on Video → talk/action the first time. After that, your browser remembers the mode you used last.</p>
+    <p class="note">The <b>Mode</b> menu starts on Video → talk/action the first time. After that, your browser remembers the mode you used last.</p>
   </div>
-  <figure class="frame" aria-label="Mockup: the env settings and the Animate tab's Mode menu">
-    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">.env · then localhost:5173</div></div>
+  <figure class="frame" aria-label="Mockup: the Animate tab's Mode menu">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate</div></div>
     <div class="app">
-<div class="env"><span class="c"># Animate (Labs): off by default</span>
-ANIMATE_ENABLED=true
-INFSH_API_KEY=<span class="c">&lt;your inference.sh key&gt;</span>
-<span class="c"># needed only for talk voices + captions</span>
-OPENAI_API_KEY=<span class="c">&lt;optional for Animate&gt;</span></div>
       <div class="appbar">
         <span class="brand">ClipDuel</span>
         <div class="tabs"><span>Make clips</span><span>Make videos</span><span>Schedule</span><span class="on">Animate<span class="labs">Labs</span></span></div>
@@ -347,7 +336,7 @@ OPENAI_API_KEY=<span class="c">&lt;optional for Animate&gt;</span></div>
       <li><b>action</b>: describe what it does, for 4–10 seconds. Action segments are silent.</li>
       <li>After each segment: <b>Resume where it cut</b> adds the animation, so the video gets longer. <b>Skip ahead to…</b> replaces that stretch of your footage instead.</li>
     </ul>
-    <p class="note">TTS voices and captions need <span class="mono">OPENAI_API_KEY</span>. A recorded voice with captions off needs no OpenAI key at all. Talk costs about $0.12 and action about $0.10 per second of animation.</p>
+    <p class="note">TTS voices and captions use OpenAI. A recorded voice with captions off doesn't. Talk costs about $0.12 and action about $0.10 per second of animation.</p>
   </div>
   <figure class="frame" aria-label="Mockup: Video to talk/action form with one segment">
     <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate · Video → talk/action</div></div>
@@ -410,16 +399,16 @@ OPENAI_API_KEY=<span class="c">&lt;optional for Animate&gt;</span></div>
   <h2 id="needs-h">What each mode needs</h2>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>Mode</th><th>Keys</th><th>Input</th><th>Length</th><th>Cost per second, at most</th></tr></thead>
+      <thead><tr><th>Mode</th><th>Input</th><th>Length</th><th>Cost per second, at most</th></tr></thead>
       <tbody>
-        <tr><td>Image to video</td><td>INFSH_API_KEY</td><td>1 image + prompt</td><td>4–10 s</td><td>≈ $0.09</td></tr>
-        <tr><td>Text to video</td><td>INFSH_API_KEY</td><td>prompt + ratio</td><td>4–10 s</td><td>≈ $0.15</td></tr>
-        <tr><td>AI Transition</td><td>INFSH_API_KEY</td><td>2 same-shape images, prompt optional</td><td>4–8 s</td><td>≈ $0.09</td></tr>
-        <tr><td>Video → talk/action</td><td>INFSH_API_KEY, plus OPENAI_API_KEY for a TTS voice or captions</td><td>your video + up to 3 segments</td><td>talk: as long as the line · action: 4–10 s</td><td>talk ≈ $0.12 · action ≈ $0.10</td></tr>
+        <tr><td>Image to video</td><td>1 image + prompt</td><td>4–10 s</td><td>≈ $0.09</td></tr>
+        <tr><td>Text to video</td><td>prompt + ratio</td><td>4–10 s</td><td>≈ $0.15</td></tr>
+        <tr><td>AI Transition</td><td>2 same-shape images, prompt optional</td><td>4–8 s</td><td>≈ $0.09</td></tr>
+        <tr><td>Video → talk/action</td><td>your video + up to 3 segments</td><td>talk: as long as the line · action: 4–10 s</td><td>talk ≈ $0.12 · action ≈ $0.10</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="foot">Mockups are simplified versions of the app, and prompts come from its idea chips. The three generated modes make 720p clips. Their per-second figures are ceilings that hold for any model the server can be set to, and the default model costs less: about $0.07 with an image and $0.12 from text alone. Which models run is a server setting.</p>
+  <p class="foot">Mockups are simplified versions of the app, and prompts come from its idea chips. The three generated modes make 720p clips. Their per-second figures are ceilings, and a clip usually costs less: about $0.07 with an image and $0.12 from text alone.</p>
 </section>
 
 </div>
