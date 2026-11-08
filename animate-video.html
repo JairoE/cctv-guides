@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>ClipDuel Animate Video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F1F2F6; --surface:#FFFFFF; --surface-2:#F7F8FB; --ink:#161922; --muted:#5B6173;
+  --line:#DADDE6; --accent:#F4C20D; --accent-ink:#161922; --btn:#1E2240; --btn-ink:#FFFFFF;
+  --ok:#1F8A5B; --ok-bg:#E3F4EC; --warn:#A86A00; --warn-bg:#FFF3D6; --bad:#B4405A; --bad-bg:#FBE8ED;
+  --talk:#6C5CE7; --action:#E17A2D;
+  --frame-bar:#E6E8EF; --shadow:0 1px 2px rgba(22,25,34,.06),0 8px 24px rgba(22,25,34,.08);
+  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#111319; --surface:#1A1D27; --surface-2:#20242F; --ink:#ECEEF4; --muted:#9BA2B5;
+    --line:#2D3242; --btn:#F4C20D; --btn-ink:#161922; --frame-bar:#252936;
+    --ok:#5BD19A; --ok-bg:#16301F; --warn:#F2B33D; --warn-bg:#33270F; --bad:#F07F98; --bad-bg:#35161E;
+    --talk:#A99CFF; --action:#F5A25D;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#111319; --surface:#1A1D27; --surface-2:#20242F; --ink:#ECEEF4; --muted:#9BA2B5;
+  --line:#2D3242; --btn:#F4C20D; --btn-ink:#161922; --frame-bar:#252936;
+  --ok:#5BD19A; --ok-bg:#16301F; --warn:#F2B33D; --warn-bg:#33270F; --bad:#F07F98; --bad-bg:#35161E;
+  --talk:#A99CFF; --action:#F5A25D;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:16px/1.6 var(--body);padding-inline:20px;padding-block:0 64px}
+@media (max-width:520px){body{padding-inline:16px}}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+p{margin:0}
+a{color:inherit}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ---------- hero ---------- */
+.hero{padding-block:56px 36px;display:grid;gap:20px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-size:clamp(40px,7vw,76px);font-weight:900;font-stretch:112%;letter-spacing:-.01em;max-width:18ch}
+.hl{background:linear-gradient(transparent 12%,var(--accent) 12%,var(--accent) 88%,transparent 88%);color:var(--accent-ink);padding-inline:.12em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero .lede{font-size:19px;max-width:62ch;color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600;margin-right:4px}
+.before{display:grid;gap:8px;max-width:72ch;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:16px 18px}
+.before b.k{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.before ul{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:15px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px}
+.flow a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);background:var(--surface);border-radius:999px;color:var(--ink);text-decoration:none;font-weight:500;font-size:14px}
+.flow a:hover{border-color:var(--ink)}
+.flow a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.flow .n{font:500 11px/1 var(--mono);color:var(--muted)}
+.flow .arrow{color:var(--muted);font-size:14px}
+
+/* ---------- steps ---------- */
+.step{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;align-items:start;padding-block:48px;border-top:1px solid var(--line);scroll-margin-top:16px}
+.step-copy{display:grid;gap:14px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px)}
+.step-num{font:600 13px/1 var(--mono);color:var(--muted);letter-spacing:.06em}
+.step h2{font-size:clamp(28px,3.4vw,40px);font-weight:850;font-stretch:108%}
+.step p{max-width:52ch}
+.step ul{margin:0;padding-left:1.1em;display:grid;gap:6px;max-width:52ch}
+.step li::marker{color:var(--muted)}
+.note{font-size:14px;color:var(--muted);border-left:3px solid var(--accent);padding:2px 0 2px 12px;max-width:52ch}
+@media (max-width:860px){
+  .step{grid-template-columns:1fr;gap:24px}
+  .step-copy{position:static}
+}
+
+/* ---------- browser frame mockup ---------- */
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;min-width:0;margin:0}
+.chrome{display:flex;align-items:center;gap:10px;background:var(--frame-bar);padding:9px 12px;border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.url{flex:1;min-width:0;font:12px/1 var(--mono);color:var(--muted);background:var(--surface);border-radius:6px;padding:6px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app{padding:18px;display:grid;gap:14px;min-width:0}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:12px;background:var(--surface);min-width:0}
+.card-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.select{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:6px 10px;font-size:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font:600 14px/1 var(--body);padding:11px 16px;border-radius:8px;background:var(--btn);color:var(--btn-ink);border:0;justify-self:start}
+.btn.sm{padding:6px 10px;font-size:12.5px;background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.field{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.input{border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:8px 10px;color:var(--ink);font-size:13.5px;min-height:40px}
+.input.ph{color:var(--muted)}
+.count{font:11px/1 var(--mono);color:var(--muted)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.num{font:13px/1 var(--mono);color:var(--ink);border:1px solid var(--line);border-radius:5px;padding:4px 8px;background:var(--surface-2)}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--ink);background:var(--surface-2)}
+.muted{color:var(--muted)}
+.small{font-size:12.5px}
+.err{font-size:12.5px;color:var(--bad)}
+.okline{font-size:12.5px;color:var(--ok)}
+.warnline{font-size:12.5px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:6px 8px}
+.pill{font:500 11px/1 var(--mono);padding:5px 7px;border-radius:4px;white-space:nowrap}
+.pill.ok{color:var(--ok);background:var(--ok-bg)}
+.pill.end{margin-left:auto}
+.pill.wait{color:var(--muted);background:var(--surface-2);border:1px solid var(--line)}
+.radio{display:inline-flex;align-items:center;gap:5px;font-size:13px}
+.radio i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--muted);display:inline-block}
+.radio.on i{border-color:var(--ink);background:radial-gradient(var(--ink) 40%,transparent 45%)}
+.check{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.check i{width:13px;height:13px;border-radius:3px;border:1.5px solid var(--muted);display:inline-block}
+.check.on i{border-color:var(--ink);background:var(--ink);box-shadow:inset 0 0 0 2px var(--surface)}
+.k{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.end{margin-left:auto}
+
+/* scenes stand in for video frames */
+.s1{--scene:linear-gradient(160deg,#2D3E50 0%,#4F6D7A 45%,#B08968 100%)}
+.s2{--scene:linear-gradient(170deg,#3B2F4A 0%,#7A5C8E 50%,#E0A96D 100%)}
+.s3{--scene:linear-gradient(165deg,#1D3B34 0%,#3C7A68 50%,#C9B27C 100%)}
+
+/* ---------- the editor mockup ---------- */
+.ed{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:12px}
+@media (max-width:560px){.ed{grid-template-columns:1fr}}
+.stagebox{border:1px solid var(--line);border-radius:8px;padding:10px;display:grid;gap:8px;align-content:start}
+.stage-frame{width:100%;max-width:170px;aspect-ratio:9/16;border-radius:8px;background:var(--scene);justify-self:center;position:relative}
+.stage-frame .cap{position:absolute;left:8%;right:8%;bottom:12%;text-align:center;font:800 13px/1.15 var(--display);color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.side{display:grid;gap:10px;align-content:start;min-width:0}
+.outline{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.outline li{display:grid;grid-template-columns:18px 52px minmax(0,1fr) auto;gap:6px;align-items:center;font-size:12.5px;border:1px solid var(--line);border-radius:6px;padding:5px 8px}
+.outline li.sel{border-color:var(--ink);background:var(--surface-2)}
+.outline .m{font-family:var(--mono)}
+.tl{border:1px solid var(--line);border-radius:8px;padding:10px;display:grid;gap:8px;min-width:0}
+.tl-head{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;font:12px/1.3 var(--mono)}
+.tracks{display:grid;grid-template-columns:72px minmax(0,1fr);gap:5px 8px;align-items:center}
+.tlabel{font:500 10.5px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.track{height:20px;border-radius:4px;background:var(--surface-2);border:1px solid var(--line);position:relative}
+.track.film{height:30px;background:repeating-linear-gradient(90deg,#3A4A5C 0 11.5%,#55707E 11.5% 12.5%);border:0}
+.blk{position:absolute;top:2px;bottom:2px;border-radius:3px}
+.blk.talk{background:var(--talk)}
+.blk.action{background:var(--action)}
+.blk.voice{background:var(--talk);opacity:.45}
+.blk.cc{background:var(--ink);opacity:.25}
+.skip{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.55) 0 4px,transparent 4px 8px)}
+.dia{position:absolute;top:50%;width:10px;height:10px;transform:translate(-50%,-50%) rotate(45deg);background:var(--ink);border:2px solid var(--surface)}
+.ph{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--bad);border-radius:1px}
+.props{border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:10px}
+.props.talk{border-left:4px solid var(--talk)}
+.props.action{border-left:4px solid var(--action)}
+.curve{width:100%;height:70px;display:block;border:1px solid var(--line);border-radius:6px;background:var(--surface-2)}
+.curve .grid{stroke:var(--line);stroke-width:1}
+.curve .line{fill:none;stroke:var(--ink);stroke-width:2}
+.curve .pt{fill:var(--accent);stroke:var(--ink);stroke-width:1.5}
+.player{width:140px;aspect-ratio:9/16;border-radius:10px;background:var(--scene);position:relative}
+.player::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:22px;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.audio{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:5px 10px;font:12px/1 var(--mono);color:var(--muted);max-width:320px}
+.audio .bar{flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--ink) 35%,var(--line) 35%)}
+.progress{display:grid;gap:4px;font:12px/1.4 var(--mono);color:var(--muted)}
+
+/* ---------- reference sections ---------- */
+.reqs{border-top:1px solid var(--line);padding-block:48px;display:grid;gap:20px;scroll-margin-top:16px}
+.reqs h2{font-size:clamp(26px,3vw,36px);font-weight:850;font-stretch:108%}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+th,td{text-align:left;padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+thead th{border-top:0;font:500 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+td:first-child{font-weight:600}
+.foot{font-size:13px;color:var(--muted);max-width:70ch;padding-top:8px}
+ul.trouble{margin:0;padding-left:1.1em;display:grid;gap:8px;max-width:72ch}
+ul.trouble li::marker{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <span class="eyebrow">ClipDuel · guide · Animate (Labs) · Video → talk/action</span>
+  <h1>Make your own footage <span class="hl">talk back.</span></h1>
+  <p class="lede">Upload one video and mark up to three moments on its timeline. At each one, your subject says a line or does something. The app cuts to an AI-animated version of that moment, then back to your footage, and gives you one MP4.</p>
+  <div class="facts">
+    <span><b>Output</b> one MP4 per video</span>
+    <span><b>Moments</b> up to 3 per video</span>
+    <span><b>Cost</b> ≈ $0.10 per second of animation</span>
+    <span><b>Tab</b> Animate (Labs) → Video → talk/action</span>
+  </div>
+  <div class="before">
+    <b class="k">Before you start</b>
+    <ul>
+      <li>Animate (Labs) is a tab for the app's admins. It shows only when Animate is turned on for your app. Open it and choose <b>Video → talk/action</b> in the <b>Mode</b> menu.</li>
+      <li>Each animated moment is a paid call to a cloud AI video service. The editor shows the price before you pay, and running the exact same job again is free.</li>
+      <li>TTS voices and captions use the app's OpenAI connection. A recorded voice with captions off doesn't need it.</li>
+    </ul>
+  </div>
+  <nav class="flow" aria-label="Steps">
+    <a href="#upload"><span class="n">1</span>Upload</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#moment"><span class="n">2</span>Find the moment</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#talk"><span class="n">3</span>Talk</a><span class="arrow" aria-hidden="true">·</span>
+    <a href="#action"><span class="n">4</span>Or act</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#seams"><span class="n">5</span>Rejoin your footage</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#price"><span class="n">6</span>Check the price</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#hear"><span class="n">7</span>Hear the lines</a><span class="arrow" aria-hidden="true">→</span>
+    <a href="#result"><span class="n">8</span>Download</a>
+  </nav>
+</header>
+
+<!-- 1 UPLOAD -->
+<section class="step" id="upload">
+  <div class="step-copy">
+    <span class="step-num">STEP 1 · UPLOAD</span>
+    <h2>Upload your video</h2>
+    <p>Pick the video you want to bring to life. The editor opens once it's uploaded.</p>
+    <ul>
+      <li>Choose an MP4, MOV, WebM, or MKV file, then click <b>Upload</b>. Choosing the file doesn't upload it.</li>
+      <li>When it's in, the file's name, length, size, and frame rate show beside the button.</li>
+      <li>The editor works on one video at a time. Uploading another one clears the spans you placed on this one. Jobs you already submitted keep running.</li>
+    </ul>
+    <p class="note">Short clips work best. Each moment you animate is a few seconds long, and the rest of the video is your own footage.</p>
+  </div>
+  <figure class="frame" aria-label="Mockup: the upload row and an empty editor">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate · Video → talk/action</div></div>
+    <div class="app">
+      <div class="card">
+        <div class="row"><span class="select">Choose file: cat.mov</span><span class="btn sm">Upload</span><span class="small muted">cat.mov · 12.80 s · 1080×1920 · 30 fps</span></div>
+        <div class="ed">
+          <div class="stagebox">
+            <div class="row"><span class="k">Stage</span><span class="btn sm end">Play</span></div>
+            <div class="stage-frame s1" role="img" aria-label="Frame under the playhead"></div>
+          </div>
+          <div class="side">
+            <p class="small muted">Scrub the timeline to the moment, then add a span. Select a span to edit it.</p>
+            <label class="field">Quality<span class="select">Final ▾</span></label>
+            <div class="row"><span class="k">Spans 0/3</span><span class="btn sm end">+ Add at playhead</span></div>
+            <p class="small muted">Scrub to the moment, then add a span there.</p>
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tl-head"><span>0:00.00 <span class="muted">/ 0:12.80</span></span></div>
+          <div class="tracks">
+            <span class="tlabel">Source</span><div class="track film"><span class="ph" style="left:0%"></span></div>
+            <span class="tlabel">Animation</span><div class="track"><span class="ph" style="left:0%"></span></div>
+            <span class="tlabel">Voice</span><div class="track"></div>
+            <span class="tlabel">Captions</span><div class="track"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<!-- 2 FIND THE MOMENT -->
+<section class="step" id="moment">
+  <div class="step-copy">
+    <span class="step-num">STEP 2 · MARK A MOMENT</span>
+    <h2>Find the moment, then add a span</h2>
+    <p>A <b>span</b> is one AI moment. At its cut, the video switches to an animated version of that exact frame.</p>
+    <ul>
+      <li>The <b>Stage</b> shows your video at the playhead. Click <b>Play</b> (or press Space) to watch, and pause where you want the cut.</li>
+      <li>Or click or drag along the timeline. The <b>Source</b> track is a filmstrip of your video.</li>
+      <li>Click <b>+ Add at playhead</b>. You can add up to 3 spans, and the list beside the stage shows each one with its price.</li>
+      <li>To move a cut, drag the span's diamond, or type a time in <b>Cut at (s)</b>. Cuts snap to a real frame.</li>
+      <li>Spans can't overlap. If two clash, a red line under the timeline says which one to fix.</li>
+      <li>Each span keeps its place in the list, in time order. Dragging a diamond stops at the spans on either side, but a typed cut doesn't. Type a time that passes another span's cut and a red line says the spans <b>must be listed in cut order</b>. To move a span past another one, remove it and add it again at the new spot.</li>
+    </ul>
+    <p class="note">The timeline has four tracks: <b>Source</b> (your video), <b>Animation</b> (one block per span), <b>Voice</b> (each spoken line's length), and <b>Captions</b> (on or off for each talk span).</p>
+  </div>
+  <figure class="frame" aria-label="Mockup: the editor with a talk span and an action span">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate · Video → talk/action</div></div>
+    <div class="app">
+      <div class="card">
+        <div class="ed">
+          <div class="stagebox">
+            <div class="row"><span class="k">Stage</span><span class="btn sm end">Play</span></div>
+            <div class="stage-frame s1" role="img" aria-label="Frame at the first cut"><span class="cap">FIVE MORE MINUTES</span></div>
+          </div>
+          <div class="side">
+            <div class="row"><span class="k">Span 1</span><span class="select">talk ▾</span><span class="btn sm end">Remove</span></div>
+            <label class="field">Cut at (s)<span class="num">3.00</span></label>
+            <label class="field">Quality<span class="select">Final ▾</span></label>
+            <div class="row"><span class="k">Spans 2/3</span><span class="btn sm end">+ Add at playhead</span></div>
+            <ol class="outline">
+              <li class="sel"><span class="m">1</span><span>talk</span><span class="m">0:03.00</span><span class="m">≈ $0.50</span></li>
+              <li><span class="m">2</span><span>action</span><span class="m">0:08.50</span><span class="m">$0.47</span></li>
+            </ol>
+          </div>
+        </div>
+        <div class="tl">
+          <div class="tl-head"><span>0:03.00 <span class="muted">/ 0:12.80 · output ≈ 0:17.60</span></span><span>≈ $0.97 final · ≈ $0.61 draft · talk has no draft</span></div>
+          <div class="tracks">
+            <span class="tlabel">Source</span><div class="track film"><span class="skip" style="left:66.4%;width:3.9%"></span><span class="ph" style="left:23.4%"></span></div>
+            <span class="tlabel">Animation</span><div class="track"><span class="blk talk" style="left:23.4%;width:20%"></span><span class="blk action" style="left:66.4%;width:22%"></span><span class="dia" style="left:23.4%"></span><span class="dia" style="left:66.4%"></span><span class="dia" style="left:70.3%"></span><span class="ph" style="left:23.4%"></span></div>
+            <span class="tlabel">Voice</span><div class="track"><span class="blk voice" style="left:23.4%;width:20%"></span></div>
+            <span class="tlabel">Captions</span><div class="track"><span class="blk cc" style="left:23.4%;width:20%"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<!-- 3 TALK -->
+<section class="step" id="talk">
+  <div class="step-copy">
+    <span class="step-num">STEP 3 · TALK</span>
+    <h2>Make it say a line</h2>
+    <p>Select a span and set its mode to <b>talk</b>. The subject lip-syncs the line, starting from the frame at the cut.</p>
+    <ul>
+      <li><b>TTS voice</b>: choose a voice, set its speed if you like, and type what it says (up to 200 characters, fewer below speed 1). <b>Delivery</b> is optional: tone, accent, or pacing.</li>
+      <li><b>Your recording</b>: pick an audio file of up to 12 seconds instead.</li>
+      <li>A line runs 2 to 15 seconds on the app's current talk model. The span is as long as its line, so its edge doesn't drag.</li>
+      <li><b>Captions</b>: pick a caption style, or <b>No captions</b>. They show only while it speaks.</li>
+      <li><b>Motion prompt</b> (optional): how it moves while it talks. Tap a chip such as <b>Turns to the camera</b> or <b>Camera holds still</b> to add one.</li>
+    </ul>
+    <p class="note">Talk costs about $0.10 per second of the line, rounded up to whole seconds. A 4.6-second line costs about $0.50.</p>
+  </div>
+  <figure class="frame" aria-label="Mockup: a talk span's properties">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate · span 1</div></div>
+    <div class="app">
+      <div class="props talk">
+        <div class="row"><span class="k">Span 1</span><span class="select">talk ▾</span><span class="btn sm end">Remove</span></div>
+        <label class="field">Cut at (s)<span class="num">3.00</span></label>
+        <div class="row"><span class="radio on"><i></i>TTS voice</span><span class="radio"><i></i>Your recording</span></div>
+        <div class="row"><span class="select">nova ▾</span><span class="small muted">speed <span class="num">1</span></span></div>
+        <div class="field"><span class="input">Five more minutes, please.</span><span class="count">26/200</span></div>
+        <div class="field"><span class="input">Sleepy and a little grumpy</span><span class="count">26/300</span></div>
+        <label class="field">Captions<span class="select">Bold Pop ▾</span></label>
+        <div class="field"><span class="input">Turns to the camera</span><span class="count">19/500</span></div>
+        <div class="chips"><span class="chip">Turns to the camera</span><span class="chip">Walks left</span><span class="chip">Jumps onto the couch</span><span class="chip">Sits down</span></div>
+        <div class="chips"><span class="chip">Camera holds still</span><span class="chip">Slow push-in</span></div>
+        <label class="field">Then<span class="select">Resume where it cut ▾</span></label>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<!-- 4 ACTION -->
+<section class="step" id="action">
+  <div class="step-copy">
+    <span class="step-num">STEP 4 · ACTION</span>
+    <h2>Or make it do something</h2>
+    <p>Set the mode to <b>action</b> and describe what happens. The model starts from the frame at the cut.</p>
+    <ul>
+      <li>Write up to 500 characters. Chips add common moves, such as <b>Walks left</b>, <b>Sits down</b>, or <b>Slow push-in</b>.</li>
+      <li><b>Length</b> is 4–10 whole seconds. Type it, or drag the span's right edge on the timeline.</li>
+      <li><b>Seed</b> (optional): leave it blank and the model picks. <b>New seed</b> picks a random one. Keep the seed of a take you like to get it again.</li>
+      <li>Action spans are silent.</li>
+    </ul>
+    <p class="note">Action costs about $0.09 per second at Final quality, and about $0.02 at Draft.</p>
+  </div>
+  <figure class="frame" aria-label="Mockup: an action span's properties">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate · span 2</div></div>
+    <div class="app">
+      <div class="props action">
+        <div class="row"><span class="k">Span 2</span><span class="select">action ▾</span><span class="btn sm end">Remove</span></div>
+        <label class="field">Cut at (s)<span class="num">8.50</span></label>
+        <div class="field"><span class="input">Jumps onto the couch, camera holds still</span><span class="count">40/500</span></div>
+        <div class="chips"><span class="chip">Turns to the camera</span><span class="chip">Walks left</span><span class="chip">Jumps onto the couch</span><span class="chip">Sits down</span></div>
+        <div class="chips"><span class="chip">Camera holds still</span><span class="chip">Slow push-in</span></div>
+        <div class="row"><span class="small muted">Length (s)</span><span class="num">5</span><span class="small muted">or drag the span's right edge</span></div>
+        <div class="row"><span class="small muted">Seed</span><span class="num">48211</span><span class="btn sm">New seed</span></div>
+        <label class="field">Then<span class="row"><span class="select">Skip ahead to… ▾</span><span class="num">9.00</span></span></label>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<!-- 5 SEAMS -->
+<section class="step" id="seams">
+  <div class="step-copy">
+    <span class="step-num">STEP 5 · REJOIN YOUR FOOTAGE</span>
+    <h2>Choose how your footage carries on</h2>
+    <p>Every span says what happens after the AI moment, under <b>Then</b>.</p>
+    <ul>
+      <li><b>Resume where it cut</b> adds the AI moment, and your footage carries on from the cut, so the video gets longer.</li>
+      <li><b>Skip ahead to…</b> replaces your footage up to the time you set. Type it, or drag the span's right diamond.</li>
+      <li><b>End on the real frame</b> (action spans that skip ahead): the AI clip lands on your footage's frame at that time, so the jump back is smooth. A preview of that frame shows below it.</li>
+      <li><b>Seam blend</b>: tick <b>Blend in</b> or <b>Blend out</b> to dissolve the picture between your footage and the AI clip, over 0.1–2 seconds. Click the line to add points and shape the curve. <b>Straight</b> resets it.</li>
+    </ul>
+    <p class="note">A blend changes only the picture. It doesn't change what the subject does, and the sound still cuts where it did. A new curve re-renders for free. The panel tells you when a seam has little to do, for example when the clip already starts on your frame.</p>
+  </div>
+  <figure class="frame" aria-label="Mockup: ending on the real frame and a seam blend curve">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate · span 2</div></div>
+    <div class="app">
+      <div class="props action">
+        <label class="field">Then<span class="row"><span class="select">Skip ahead to… ▾</span><span class="num">9.00</span></span></label>
+        <span class="check on"><i></i>End on the real frame at 0:09.00</span>
+        <div class="row"><span class="stage-frame s3" style="width:44px;max-width:44px" role="img" aria-label="The end frame"></span><span class="small muted">The clip lands on this frame.</span></div>
+        <div class="field">
+          <span class="k">Seam blend</span>
+          <span class="small muted">Dissolves the picture between your footage and the AI clip. It doesn't change what the animal does, and the sound still cuts where it did.</span>
+        </div>
+        <span class="check"><i></i>Blend in</span>
+        <span class="small muted">Little to do here: the clip starts on your frame, so this seam is already close to invisible.</span>
+        <span class="check on"><i></i>Blend out</span>
+        <div class="row"><span class="small muted">Over (s)</span><span class="num">0.5</span><span class="btn sm">Straight</span></div>
+        <svg class="curve" viewBox="0 0 300 70" preserveAspectRatio="none" role="img" aria-label="A blend curve with one point">
+          <line class="grid" x1="0" y1="35" x2="300" y2="35"/>
+          <path class="line" d="M6 8 C 90 10, 130 30, 160 40 S 260 62, 294 62"/>
+          <circle class="pt" cx="160" cy="40" r="5"/>
+        </svg>
+        <span class="small muted">Drag a point to shape it. Click a point to remove it.</span>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<!-- 6 PRICE -->
+<section class="step" id="price">
+  <div class="step-copy">
+    <span class="step-num">STEP 6 · CHECK THE PRICE</span>
+    <h2>Check the price and quality</h2>
+    <p>The editor prices the job as you build it, before anything is paid for.</p>
+    <ul>
+      <li>The timeline's top line shows the whole job, for example <b>≈ $0.97 final · ≈ $0.61 draft · talk has no draft</b>. <b>≈</b> means the line's length is an estimate until its voice is made.</li>
+      <li><b>Quality</b>: <b>Final</b>, or <b>Draft</b> (480p, action only). A draft runs action spans cheaply at low resolution, so you can check the motion. Talk costs the same either way.</li>
+      <li><b>output ≈</b> shows how long the finished video will run.</li>
+      <li>If something isn't finished, a line under the timeline says what, such as <b>Span 2 still needs an action prompt</b>, and <b>Animate</b> stays greyed out.</li>
+    </ul>
+    <p class="note">The price covers the AI animation on a first run. The voice and the caption timing add a few cents. Running the exact same job again is free.</p>
+  </div>
+  <figure class="frame" aria-label="Mockup: the price line and the submit buttons">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate · Video → talk/action</div></div>
+    <div class="app">
+      <div class="card">
+        <div class="tl">
+          <div class="tl-head"><span>0:08.50 <span class="muted">/ 0:12.80 · output ≈ 0:17.60</span></span><span>≈ $0.97 final · ≈ $0.61 draft · talk has no draft</span></div>
+        </div>
+        <label class="field">Quality<span class="select">Draft (480p, action only) ▾</span></label>
+        <div class="row">
+          <span class="btn">Animate draft</span>
+          <span class="btn ghost">Hear the lines first</span>
+          <span class="small muted">≈ $0.97 final · ≈ $0.61 draft · talk has no draft on a first run</span>
+        </div>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<!-- 7 HEAR -->
+<section class="step" id="hear">
+  <div class="step-copy">
+    <span class="step-num">STEP 7 · OPTIONAL</span>
+    <h2>Hear the lines before you pay</h2>
+    <p><b>Hear the lines first</b> makes each talk span's voice and caption timing, which costs pennies, then stops before any animation is paid for.</p>
+    <ul>
+      <li>The job's card plays each line. If you like them, click <b>Generate</b> to make the animation.</li>
+      <li>If you don't, click <b>Open in editor</b>, change the words, and hear them again. Each try is its own card, and a wording you've already heard is free.</li>
+      <li>A try you don't generate just waits. It costs nothing more.</li>
+      <li>With no talk span there's nothing to hear, so the button is greyed out.</li>
+    </ul>
+  </div>
+  <figure class="frame" aria-label="Mockup: a job card waiting with its line ready to play">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate</div></div>
+    <div class="app">
+      <div class="card">
+        <div class="card-head"><span class="small muted">cat.mov · 13s source</span><span class="pill ok end">prepared</span></div>
+        <div class="progress">
+          <span>segment 1 (3.0s): audio ✓ · words ✓ · animated …</span>
+          <span>segment 2 (8.5s): audio ✓ · words ✓ · animated … · seed 48211 · ends on 9.00s</span>
+        </div>
+        <p class="small muted">Line 1: “Five more minutes, please.”</p>
+        <div class="audio" role="img" aria-label="Audio player"><span>▶</span><span class="bar"></span><span>0:04</span></div>
+        <div class="row"><span class="btn">Generate</span><span class="btn sm">Open in editor</span></div>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<!-- 8 RESULT -->
+<section class="step" id="result">
+  <div class="step-copy">
+    <span class="step-num">STEP 8 · THE RESULT</span>
+    <h2>Animate, wait, then download</h2>
+    <p>Click <b>Animate</b> (<b>Animate draft</b> at Draft quality). The job gets a card under the editor.</p>
+    <ul>
+      <li>The card shows its status in the corner: <b>queued</b>, <b>preparing</b>, <b>generating</b>, <b>splicing</b>, then <b>done</b> or <b>failed</b>. One line per span ticks <b>audio</b>, <b>words</b>, and <b>animated</b> as each is ready. Action spans have no audio or words, so those tick right away.</li>
+      <li>The app animates one job at a time. A job you submit while another runs waits its turn.</li>
+      <li>When it's done, the card has a player and a <b>Download</b> link. The Stage gets <b>Source frame</b> and <b>Result</b> buttons, so you can compare.</li>
+      <li><b>Open in editor</b> brings a job's spans back, so you can tune them and run it again. Anything unchanged is reused for free.</li>
+      <li>You can leave the page. If the app restarts, the job picks up where it stopped, and nothing already made is paid for again.</li>
+    </ul>
+    <p class="note">Animate videos aren't part of blind picks or the Schedule queue. Download yours and post it yourself.</p>
+  </div>
+  <figure class="frame" aria-label="Mockup: a finished job card">
+    <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url">localhost:5173 / animate</div></div>
+    <div class="app">
+      <div class="card">
+        <div class="card-head"><span class="small muted">cat.mov · 13s source</span><span class="pill ok end">done</span></div>
+        <div class="progress">
+          <span>segment 1 (3.0s): audio ✓ · words ✓ · animated ✓</span>
+          <span>segment 2 (8.5s): audio ✓ · words ✓ · animated ✓ · seed 48211 · ends on 9.00s · blend out 0.5 s</span>
+        </div>
+        <div class="player s1" role="img" aria-label="Video player"></div>
+        <div class="row"><a href="#result">Download</a><span class="btn sm">Open in editor</span></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="small muted">dog.mp4 · 9s source · draft</span><span class="pill wait end">queued</span></div>
+        <div class="progress"><span>segment 1 (2.2s): audio … · words … · animated …</span></div>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<section class="reqs" id="trouble" aria-labelledby="trouble-h">
+  <h2 id="trouble-h">If something is greyed out or fails</h2>
+  <ul class="trouble">
+    <li><b>Animate is greyed out.</b> Something isn't finished, such as a span with no line or prompt, or two spans that overlap. The lines under the timeline say what.</li>
+    <li><b>A red line says the spans must be listed in cut order.</b> A typed cut passed another span's cut. Type a time between the spans on either side, or remove the span and add it again at the new spot.</li>
+    <li><b>+ Add at playhead is greyed out.</b> You already have 3 spans, or the playhead sits where a span can't start, such as inside another span or footage one of them skips.</li>
+    <li><b>TTS voices or captions are greyed out.</b> They need the app's OpenAI connection. Use <b>Your recording</b> with <b>No captions</b> instead, or ask whoever runs your app.</li>
+    <li><b>A line is too short or too long.</b> Lines run 2 to 15 seconds. Change the wording or the speed, or pick a different recording.</li>
+    <li><b>The Stage shows a still frame and no Play button.</b> You reopened a job, or your browser can't play this file type. Scrubbing still shows each frame.</li>
+    <li><b>A job failed.</b> The card says why. Fix it if it names your input, then submit again. Anything already generated is reused, so it isn't paid for twice.</li>
+  </ul>
+</section>
+
+<section class="reqs" id="needs" aria-labelledby="needs-h">
+  <h2 id="needs-h">What each span needs</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Span</th><th>You give</th><th>Length</th><th>Cost per second</th></tr></thead>
+      <tbody>
+        <tr><td>talk, TTS voice</td><td>a voice and up to 200 characters; delivery and motion prompt optional</td><td>the line: 2–15 s</td><td>≈ $0.10, whole seconds</td></tr>
+        <tr><td>talk, your recording</td><td>an audio file up to 12 s; motion prompt optional</td><td>the recording</td><td>≈ $0.10, whole seconds</td></tr>
+        <tr><td>action</td><td>a prompt up to 500 characters; seed optional</td><td>4–10 s</td><td>≈ $0.09 final · ≈ $0.02 draft</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="foot">Up to 3 spans per video. Mockups are simplified versions of the app, and prices are what the AI animation costs on a first run. For photos, prompts, and transitions, see the <a href="animate.html">Animate guide</a>.</p>
+</section>
+
+</div>
+
+</body>
+</html>

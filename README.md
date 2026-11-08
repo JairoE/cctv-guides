@@ -6,6 +6,7 @@ Static user guides for ClipDuel, served with GitHub Pages.
 - `first-run.html`: Make clips, the first-run guide
 - `text-to-video.html`: Make videos, the text-to-video guide
 - `animate.html`: Animate (Labs), its four modes and what each needs
+- `animate-video.html`: Animate (Labs) → Video → talk/action, step by step for one video
 
 Plain HTML with no build step. Screens are simplified mockups of the app: three tabs (Make clips, Make videos, Schedule) plus Animate (Labs) when it's turned on.
 
