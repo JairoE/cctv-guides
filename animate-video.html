@@ -262,6 +262,7 @@ ul.trouble li::marker{color:var(--muted)}
       <li>Click <b>+ Add at playhead</b>. You can add up to 3 spans, and the list beside the stage shows each one with its price.</li>
       <li>To move a cut, drag the span's diamond, or type a time in <b>Cut at (s)</b>. Cuts snap to a real frame.</li>
       <li>Spans can't overlap. If two clash, a red line under the timeline says which one to fix.</li>
+      <li>Each span keeps its place in the list, in time order. Dragging a diamond stops at the spans on either side, but a typed cut doesn't. Type a time that passes another span's cut and a red line says the spans <b>must be listed in cut order</b>. To move a span past another one, remove it and add it again at the new spot.</li>
     </ul>
     <p class="note">The timeline has four tracks: <b>Source</b> (your video), <b>Animation</b> (one block per span), <b>Voice</b> (each spoken line's length), and <b>Captions</b> (on or off for each talk span).</p>
   </div>
@@ -506,6 +507,7 @@ ul.trouble li::marker{color:var(--muted)}
   <h2 id="trouble-h">If something is greyed out or fails</h2>
   <ul class="trouble">
     <li><b>Animate is greyed out.</b> Something isn't finished, such as a span with no line or prompt, or two spans that overlap. The lines under the timeline say what.</li>
+    <li><b>A red line says the spans must be listed in cut order.</b> A typed cut passed another span's cut. Type a time between the spans on either side, or remove the span and add it again at the new spot.</li>
     <li><b>+ Add at playhead is greyed out.</b> You already have 3 spans, or the playhead sits where a span can't start, such as inside another span or footage one of them skips.</li>
     <li><b>TTS voices or captions are greyed out.</b> They need the app's OpenAI connection. Use <b>Your recording</b> with <b>No captions</b> instead, or ask whoever runs your app.</li>
     <li><b>A line is too short or too long.</b> Lines run 2 to 15 seconds. Change the wording or the speed, or pick a different recording.</li>
